@@ -51,6 +51,7 @@
         android:background="@drawable/input_design"
         android:hint="@string/password"
         android:padding="10dp"
+        android:password="true"
         android:textColorHint="@android:color/white"
         android:textSize="15sp"
         android:textStyle="bold" />

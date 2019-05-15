@@ -2,6 +2,7 @@ package com.onlineshop;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,11 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 @SuppressLint("Registered")
 public class RegisterActivity extends AppCompatActivity {
@@ -31,9 +36,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         createAccountButton = findViewById(R.id.main_register_button);
-        username = findViewById(R.id.username);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
+        username = (EditText) findViewById(R.id.username);
+        email = (EditText) findViewById(R.id.email);
+        password = (EditText) findViewById(R.id.password);
         loadingBar = new ProgressDialog(this);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,18 +64,38 @@ public class RegisterActivity extends AppCompatActivity {
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
 
-            ValidateEmail(name, email, password);
+            ValidateEmail(name, mail, pass);
         }
     }
 
-    private void ValidateEmail(String name, EditText email, EditText password){
+    private void ValidateEmail(final String username, final String email, final String password) {
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
 
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                if ((!dataSnapshot.child("Users").child(email).exists())) {
+                    HashMap<String, Object> userdataMap = new HashMap<>();
+                    userdataMap.put("email", email);
+                    userdataMap.put("password", password);
+                    userdataMap.put("username", username);
+                    RootRef.child("Users").child(email).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(RegisterActivity.this, "Congratulations, your account has been created", Toast.LENGTH_LONG).show();
+                                loadingBar.dismiss();
+                            }
+                        }
+                    });
+                } else {
+                    Toast.makeText(RegisterActivity.this, "This " + email + " already exists", Toast.LENGTH_LONG).show();
+                    loadingBar.dismiss();
+                    Toast.makeText(RegisterActivity.this, "Please try again using another email", Toast.LENGTH_LONG).show();
+                    Intent openLogin = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(openLogin);
+                }
             }
 
             @Override

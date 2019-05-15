@@ -23,6 +23,7 @@
         android:inputType="text"
         android:padding="10dp"
         android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -39,6 +40,7 @@
         android:inputType="text"
         android:padding="10dp"
         android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -55,6 +57,7 @@
         android:padding="10dp"
         android:inputType="textPassword"
         android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:textSize="15sp"
         android:textStyle="bold" />
 

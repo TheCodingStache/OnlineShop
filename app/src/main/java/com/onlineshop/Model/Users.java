@@ -5,17 +5,6 @@ public class Users {
     private String password;
     private String phone;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public Users(String name, String password, String phone) {
         this.name = name;

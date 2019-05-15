@@ -48,11 +48,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void createAccount() {
         String name = username.getText().toString();
-        String mail = phone.getText().toString();
+        String mobilePhone = phone.getText().toString();
         String pass = password.getText().toString();
         if (TextUtils.isEmpty(name)) {
             Toast.makeText(this, "Please write your username...", Toast.LENGTH_LONG).show();
-        } else if (TextUtils.isEmpty(mail)) {
+        } else if (TextUtils.isEmpty(mobilePhone)) {
             Toast.makeText(this, "Please write your phone number...", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(pass)) {
             Toast.makeText(this, "Please write your password...", Toast.LENGTH_LONG).show();
@@ -62,23 +62,23 @@ public class RegisterActivity extends AppCompatActivity {
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
 
-            ValidateEmail(name, mail, pass);
+            ValidateEmail(name, mobilePhone, pass);
         }
     }
 
-    private void ValidateEmail(final String username, final String email, final String password) {
+    private void ValidateEmail(final String username, final String phone, final String password) {
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference().child("posts");
 
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!(dataSnapshot.child("Users").child(email).exists())) {
+                if (!(dataSnapshot.child("Users").child(phone).exists())) {
                     HashMap<String, Object> userdataMap = new HashMap<>();
-                    userdataMap.put("email", email);
-                    userdataMap.put("password", password);
                     userdataMap.put("username", username);
-                    RootRef.child("Users").child(email).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    userdataMap.put("phone", phone);
+                    userdataMap.put("password", password);
+                    RootRef.child("Users").child(phone).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
@@ -93,9 +93,9 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    Toast.makeText(RegisterActivity.this, "This " + email + " already exists", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "This " + phone + " already exists", Toast.LENGTH_LONG).show();
                     loadingBar.dismiss();
-                    Toast.makeText(RegisterActivity.this, "Please try again using another email", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "Please try again using another phone", Toast.LENGTH_LONG).show();
                     Intent openMainActivity = new Intent(RegisterActivity.this, MainActivity.class);
                     startActivity(openMainActivity);
                 }

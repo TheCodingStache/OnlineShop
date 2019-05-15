@@ -11,5 +11,8 @@
     <string name="login">Login</string>
     <string name="create">Create Account</string>
     <string name="username">Username</string>
+    <string name="logout">Log out</string>
+    <string name="seller_panel">Im a Seller</string>
+    <string name="client_panel">Im a client</string>
     <string name="linear_layout_1"></string>
 </resources>

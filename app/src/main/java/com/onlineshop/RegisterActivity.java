@@ -25,7 +25,7 @@ import java.util.HashMap;
 @SuppressLint("Registered")
 public class RegisterActivity extends AppCompatActivity {
     private EditText username;
-    private EditText email;
+    private EditText phone;
     private EditText password;
     private ProgressDialog loadingBar;
 
@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         Button createAccountButton = findViewById(R.id.create);
         username = findViewById(R.id.username);
-        email = findViewById(R.id.email);
+        phone = findViewById(R.id.phone);
         password = findViewById(R.id.password);
         loadingBar = new ProgressDialog(this);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
@@ -48,12 +48,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void createAccount() {
         String name = username.getText().toString();
-        String mail = email.getText().toString();
+        String mail = phone.getText().toString();
         String pass = password.getText().toString();
         if (TextUtils.isEmpty(name)) {
             Toast.makeText(this, "Please write your username...", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(mail)) {
-            Toast.makeText(this, "Please write your email...", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please write your phone number...", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(pass)) {
             Toast.makeText(this, "Please write your password...", Toast.LENGTH_LONG).show();
         } else {

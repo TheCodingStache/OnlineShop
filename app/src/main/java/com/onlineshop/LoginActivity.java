@@ -1,5 +1,6 @@
 package com.onlineshop;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         sellerPanel.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 loginButton.setText("Seller log in");
@@ -60,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         clientPanel.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 loginButton.setText("Client log in");

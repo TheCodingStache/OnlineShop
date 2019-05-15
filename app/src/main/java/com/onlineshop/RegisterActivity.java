@@ -69,7 +69,6 @@ public class RegisterActivity extends AppCompatActivity {
     private void ValidateEmail(final String username, final String phone, final String password) {
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference().child("posts");
-
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

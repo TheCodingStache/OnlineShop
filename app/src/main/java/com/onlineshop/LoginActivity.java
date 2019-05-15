@@ -99,8 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (dataSnapshot.child(parentDatabaseName).child(phone).exists()) {
                     Users userData = dataSnapshot.child(parentDatabaseName).child(phone).getValue(Users.class);
                     assert userData != null;
-                    if (userData.getPhone().equals(phone)) {
-                        if (userData.getPassword().equals(password)) {
+                    if (userData.getPhone().equals(phone) && userData.getPassword().equals(password)) {
                             if (parentDatabaseName.equals("Admins")) {
                                 Toast.makeText(LoginActivity.this, "Hello seller! You logged in successfully!", Toast.LENGTH_LONG).show();
                                 loadingBar.dismiss();
@@ -123,7 +122,6 @@ public class LoginActivity extends AppCompatActivity {
                         loadingBar.dismiss();
                     }
                 }
-            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

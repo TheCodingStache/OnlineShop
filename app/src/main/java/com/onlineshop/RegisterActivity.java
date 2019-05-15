@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -25,7 +24,6 @@ import java.util.HashMap;
 
 @SuppressLint("Registered")
 public class RegisterActivity extends AppCompatActivity {
-    private Button createAccountButton;
     private EditText username;
     private EditText email;
     private EditText password;
@@ -35,10 +33,10 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        createAccountButton = findViewById(R.id.main_register_button);
-        username = (EditText) findViewById(R.id.username);
-        email = (EditText) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
+        Button createAccountButton = findViewById(R.id.main_register_button);
+        username = findViewById(R.id.username);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
         loadingBar = new ProgressDialog(this);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override

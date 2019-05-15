@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Button createAccountButton = findViewById(R.id.main_register_button);
+        Button createAccountButton = findViewById(R.id.create);
         username = findViewById(R.id.username);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
@@ -68,12 +68,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void ValidateEmail(final String username, final String email, final String password) {
         final DatabaseReference RootRef;
-        RootRef = FirebaseDatabase.getInstance().getReference();
+        RootRef = FirebaseDatabase.getInstance().getReference().child("posts");
 
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if ((!dataSnapshot.child("Users").child(email).exists())) {
+                if (!(dataSnapshot.child("Users").child(email).exists())) {
                     HashMap<String, Object> userdataMap = new HashMap<>();
                     userdataMap.put("email", email);
                     userdataMap.put("password", password);
@@ -81,9 +81,14 @@ public class RegisterActivity extends AppCompatActivity {
                     RootRef.child("Users").child(email).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Toast.makeText(RegisterActivity.this, "Congratulations, your account has been created", Toast.LENGTH_LONG).show();
                                 loadingBar.dismiss();
+                                Intent openLoginActivity = new Intent(RegisterActivity.this, LoginActivity.class);
+                                startActivity(openLoginActivity);
+                            } else {
+                                loadingBar.dismiss();
+                                Toast.makeText(RegisterActivity.this, "Network error, please try again", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -91,8 +96,8 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "This " + email + " already exists", Toast.LENGTH_LONG).show();
                     loadingBar.dismiss();
                     Toast.makeText(RegisterActivity.this, "Please try again using another email", Toast.LENGTH_LONG).show();
-                    Intent openLogin = new Intent(RegisterActivity.this, MainActivity.class);
-                    startActivity(openLogin);
+                    Intent openMainActivity = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(openMainActivity);
                 }
             }
 

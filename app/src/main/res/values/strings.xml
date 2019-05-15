@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Online Shop</string>
+    <string name="app_logo"> </string>
+    <string name="app_slogan"> Donate your undesirable clothes or discover new ones for free! </string>
+    <string name="main_login_button"> Already have an account? Please Log in</string>
+    <string name="main_register_button">Join Now</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="recover_password">Forgot Password?</string>
+    <string name="login">Login</string>
+    <string name="create">Create Account</string>
+    <string name="username">Username</string>
+    <string name="linear_layout_1"></string>
+</resources>

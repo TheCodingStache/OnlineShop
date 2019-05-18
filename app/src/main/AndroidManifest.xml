@@ -11,17 +11,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AddProductActivity"></activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".AddProductActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".ClientRegisterActivity" />
+        <activity android:name=".Prevalent.CategoryActivity"/>
+        <activity android:name=".SelectUserOptionActivity"/>
+        <activity android:name=".SellerRegisterActivity"/>
     </application>
 
 </manifest>

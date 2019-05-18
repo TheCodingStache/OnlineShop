@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 @SuppressLint("Registered")
-public class RegisterActivity extends AppCompatActivity {
+public class SellerRegisterActivity extends AppCompatActivity {
     private EditText username;
     private EditText phone;
     private EditText password;
@@ -32,8 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        Button createAccountButton = findViewById(R.id.create);
+        setContentView(R.layout.activity_client_register);
+        Button createAccountButton = findViewById(R.id.create_client);
         username = findViewById(R.id.username);
         phone = findViewById(R.id.phone);
         password = findViewById(R.id.password);
@@ -72,30 +72,30 @@ public class RegisterActivity extends AppCompatActivity {
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!(dataSnapshot.child("Users").child(username).exists())) {
+                if (!(dataSnapshot.child("Admins").child(username).exists())) {
                     HashMap<String, Object> userdataMap = new HashMap<>();
                     userdataMap.put("username", username);
                     userdataMap.put("phone", phone);
                     userdataMap.put("password", password);
-                    RootRef.child("Users").child(username).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    RootRef.child("Admins").child(username).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(RegisterActivity.this, "Congratulations, your account has been created", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SellerRegisterActivity.this, "Congratulations, your account has been created", Toast.LENGTH_LONG).show();
                                 loadingBar.dismiss();
-                                Intent openLoginActivity = new Intent(RegisterActivity.this, LoginActivity.class);
+                                Intent openLoginActivity = new Intent(SellerRegisterActivity.this, LoginActivity.class);
                                 startActivity(openLoginActivity);
                             } else {
                                 loadingBar.dismiss();
-                                Toast.makeText(RegisterActivity.this, "Network error, please try again", Toast.LENGTH_LONG).show();
+                                Toast.makeText(SellerRegisterActivity.this, "Network error, please try again", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
                 } else {
-                    Toast.makeText(RegisterActivity.this, "This " + phone + " already exists", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SellerRegisterActivity.this, "This " + phone + " already exists", Toast.LENGTH_LONG).show();
                     loadingBar.dismiss();
-                    Toast.makeText(RegisterActivity.this, "Please try again using another phone", Toast.LENGTH_LONG).show();
-                    Intent openMainActivity = new Intent(RegisterActivity.this, MainActivity.class);
+                    Toast.makeText(SellerRegisterActivity.this, "Please try again using another phone", Toast.LENGTH_LONG).show();
+                    Intent openMainActivity = new Intent(SellerRegisterActivity.this, MainActivity.class);
                     startActivity(openMainActivity);
                 }
             }

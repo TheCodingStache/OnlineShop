@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent register = new Intent(MainActivity.this, RegisterActivity.class);
+                Intent register = new Intent(MainActivity.this, SelectUserOptionActivity.class);
                 startActivity(register);
             }
         });

@@ -63,7 +63,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/create"
+        android:id="@+id/create_seller"
         android:padding="17dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
-        android:text="@string/create"
+        android:text="@string/create_seller"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp" />

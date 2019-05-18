@@ -9,10 +9,24 @@
     <string name="remember_me">Remember me</string>
     <string name="recover_password">Forgot Password?</string>
     <string name="login">Login</string>
-    <string name="create">Create Account</string>
+    <string name="create_seller">Create Account as a Seller</string>
+    <string name="create_client">Create Account as a Client</string>
     <string name="username">Username</string>
     <string name="logout">Log out</string>
     <string name="seller_panel">Im a Seller</string>
     <string name="client_panel">Im a client</string>
     <string name="linear_layout_1"></string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
 </resources>

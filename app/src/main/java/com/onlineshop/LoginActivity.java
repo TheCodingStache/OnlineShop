@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.onlineshop.Model.Users;
+import com.onlineshop.Prevalent.CategoryActivity;
 import com.onlineshop.Prevalent.Prevalent;
 
 import io.paperdb.Paper;
@@ -37,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        username = findViewById(R.id.phone);
+        username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         loadingBar = new ProgressDialog(this);
@@ -100,31 +101,31 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(parentDatabaseName).child(username).exists()) {
-                    Users userData = dataSnapshot.child(parentDatabaseName).child(username).getValue(Users.class);
-                    assert userData != null;
-                    if (userData.getPhone().equals(username) && userData.getPassword().equals(password)) {
+                    Users usersData = dataSnapshot.child(parentDatabaseName).child(username).getValue(Users.class);
+                    if (usersData.getUsername() != null && usersData.getUsername().equals(username)) {
+                        if (usersData.getPassword().equals(password)) {
                             if (parentDatabaseName.equals("Admins")) {
-                                Toast.makeText(LoginActivity.this, "Hello seller! You logged in successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Welcome Admin, you are logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
-                                Intent openHomeActivity = new Intent(LoginActivity.this, AddProductActivity.class);
-                                startActivity(openHomeActivity);
-                                finish();
+                                Intent intent = new Intent(LoginActivity.this, CategoryActivity.class);
+                                startActivity(intent);
                             } else if (parentDatabaseName.equals("Users")) {
-                                Toast.makeText(LoginActivity.this, "Logged in successfully!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
-                                Intent openHomeActivity = new Intent(LoginActivity.this, HomeActivity.class);
-                                startActivity(openHomeActivity);
-                                finish();
+                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                Prevalent.currentOnlineUser = usersData;
+                                startActivity(intent);
                             }
                         } else {
                             loadingBar.dismiss();
-                            Toast.makeText(LoginActivity.this, "Wrong password", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Password is incorrect.", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Account with this" + username + "number doesn't exists.", Toast.LENGTH_LONG).show();
-                        loadingBar.dismiss();
                     }
+                } else {
+                    Toast.makeText(LoginActivity.this, "Account with this " + username + " do not exists.", Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
                 }
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

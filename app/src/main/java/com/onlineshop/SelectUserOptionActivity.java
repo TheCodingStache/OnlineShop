@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.onlineshop.Client.ClientRegisterActivity;
+import com.onlineshop.Seller.SellerRegisterActivity;
+
 @SuppressLint("Registered")
 public class SelectUserOptionActivity extends AppCompatActivity {
     Button seller;
@@ -26,12 +29,14 @@ public class SelectUserOptionActivity extends AppCompatActivity {
                 startActivity(openSellerRegistration);
             }
         });
-        seller.setOnClickListener(new View.OnClickListener() {
+        client.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openClientRegistration = new Intent(SelectUserOptionActivity.this, SellerRegisterActivity.class);
+                Intent openClientRegistration = new Intent(SelectUserOptionActivity.this, ClientRegisterActivity.class);
                 startActivity(openClientRegistration);
+                finish();
             }
         });
     }
+
 }

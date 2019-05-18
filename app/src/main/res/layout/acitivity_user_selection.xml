@@ -21,7 +21,7 @@
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
         android:padding="17dp"
-        android:text="Create account as a Seller!"
+        android:text="@string/create_seller"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
@@ -36,7 +36,7 @@
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
         android:padding="17dp"
-        android:text="Create account as a Client!"
+        android:text="@string/create_client"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp" />

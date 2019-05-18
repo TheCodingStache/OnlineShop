@@ -1,4 +1,4 @@
-package com.onlineshop;
+package com.onlineshop.Seller;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -19,6 +19,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.onlineshop.LoginActivity;
+import com.onlineshop.MainActivity;
+import com.onlineshop.R;
 
 import java.util.HashMap;
 
@@ -32,8 +35,8 @@ public class SellerRegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_register);
-        Button createAccountButton = findViewById(R.id.create_client);
+        setContentView(R.layout.activity_seller_register);
+        Button createAccountButton = findViewById(R.id.create_seller);
         username = findViewById(R.id.username);
         phone = findViewById(R.id.phone);
         password = findViewById(R.id.password);
@@ -41,12 +44,12 @@ public class SellerRegisterActivity extends AppCompatActivity {
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createAccount();
+                createSellerAccount();
             }
         });
     }
 
-    private void createAccount() {
+    private void createSellerAccount() {
         String name = username.getText().toString();
         String mobilePhone = phone.getText().toString();
         String pass = password.getText().toString();
@@ -68,16 +71,16 @@ public class SellerRegisterActivity extends AppCompatActivity {
 
     private void ValidateEmail(final String username, final String phone, final String password) {
         final DatabaseReference RootRef;
-        RootRef = FirebaseDatabase.getInstance().getReference().child("posts");
+        RootRef = FirebaseDatabase.getInstance().getReference().child("Shop");
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!(dataSnapshot.child("Admins").child(username).exists())) {
+                if (!(dataSnapshot.child("Sellers").child(username).exists())) {
                     HashMap<String, Object> userdataMap = new HashMap<>();
                     userdataMap.put("username", username);
                     userdataMap.put("phone", phone);
                     userdataMap.put("password", password);
-                    RootRef.child("Admins").child(username).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    RootRef.child("Sellers").child(username).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
@@ -85,6 +88,7 @@ public class SellerRegisterActivity extends AppCompatActivity {
                                 loadingBar.dismiss();
                                 Intent openLoginActivity = new Intent(SellerRegisterActivity.this, LoginActivity.class);
                                 startActivity(openLoginActivity);
+                                finishAndRemoveTask();
                             } else {
                                 loadingBar.dismiss();
                                 Toast.makeText(SellerRegisterActivity.this, "Network error, please try again", Toast.LENGTH_LONG).show();
@@ -92,7 +96,7 @@ public class SellerRegisterActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    Toast.makeText(SellerRegisterActivity.this, "This " + phone + " already exists", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SellerRegisterActivity.this, "This " + username + " already exists", Toast.LENGTH_LONG).show();
                     loadingBar.dismiss();
                     Toast.makeText(SellerRegisterActivity.this, "Please try again using another phone", Toast.LENGTH_LONG).show();
                     Intent openMainActivity = new Intent(SellerRegisterActivity.this, MainActivity.class);

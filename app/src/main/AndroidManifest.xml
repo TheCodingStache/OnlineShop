@@ -23,10 +23,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ClientRegisterActivity" />
+        <activity android:name=".Client.ClientRegisterActivity" />
         <activity android:name=".Prevalent.CategoryActivity"/>
         <activity android:name=".SelectUserOptionActivity"/>
-        <activity android:name=".SellerRegisterActivity"/>
+        <activity android:name=".Seller.SellerRegisterActivity"/>
     </application>
 
 </manifest>

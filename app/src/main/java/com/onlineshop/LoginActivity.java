@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                 loginButton.setText("Seller log in");
                 sellerPanel.setVisibility(View.INVISIBLE);
                 clientPanel.setVisibility(View.VISIBLE);
-                parentDatabaseName = "Admins";
+                parentDatabaseName = "Sellers";
             }
         });
         clientPanel.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                 loginButton.setText("Client log in");
                 clientPanel.setVisibility(View.INVISIBLE);
                 sellerPanel.setVisibility(View.VISIBLE);
-                parentDatabaseName = "Users";
+                parentDatabaseName = "Clients";
             }
         });
     }
@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         String name = username.getText().toString();
         String pass = password.getText().toString();
         if (TextUtils.isEmpty(name)) {
-            Toast.makeText(this, "Please write your mobile phone...", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please write your username...", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(pass)) {
             Toast.makeText(this, "Please write your password...", Toast.LENGTH_LONG).show();
         } else {
@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
             Paper.book().write(Prevalent.UserPasswordKey, password);
         }
         final DatabaseReference RootRef;
-        RootRef = FirebaseDatabase.getInstance().getReference().child("posts");
+        RootRef = FirebaseDatabase.getInstance().getReference().child("Shop");
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -104,12 +104,12 @@ public class LoginActivity extends AppCompatActivity {
                     Users usersData = dataSnapshot.child(parentDatabaseName).child(username).getValue(Users.class);
                     if (usersData.getUsername() != null && usersData.getUsername().equals(username)) {
                         if (usersData.getPassword().equals(password)) {
-                            if (parentDatabaseName.equals("Admins")) {
+                            if (parentDatabaseName.equals("Sellers")) {
                                 Toast.makeText(LoginActivity.this, "Welcome Admin, you are logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, CategoryActivity.class);
                                 startActivity(intent);
-                            } else if (parentDatabaseName.equals("Users")) {
+                            } else if (parentDatabaseName.equals("Clients")) {
                                 Toast.makeText(LoginActivity.this, "logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-                    Toast.makeText(LoginActivity.this, "Account with this " + username + " do not exists.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Account with " + username + " username, doesn't exists.", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }

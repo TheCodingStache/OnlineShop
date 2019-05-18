@@ -1,4 +1,4 @@
-package com.onlineshop;
+package com.onlineshop.Client;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -19,6 +19,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.onlineshop.LoginActivity;
+import com.onlineshop.MainActivity;
+import com.onlineshop.R;
 
 import java.util.HashMap;
 
@@ -68,16 +71,16 @@ public class ClientRegisterActivity extends AppCompatActivity {
 
     private void ValidateEmail(final String username, final String phone, final String password) {
         final DatabaseReference RootRef;
-        RootRef = FirebaseDatabase.getInstance().getReference().child("posts");
+        RootRef = FirebaseDatabase.getInstance().getReference().child("Shop");
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!(dataSnapshot.child("Users").child(username).exists())) {
+                if (!(dataSnapshot.child("Clients").child(username).exists())) {
                     HashMap<String, Object> userdataMap = new HashMap<>();
                     userdataMap.put("username", username);
                     userdataMap.put("phone", phone);
                     userdataMap.put("password", password);
-                    RootRef.child("Users").child(username).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    RootRef.child("Clients").child(username).updateChildren(userdataMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
@@ -85,6 +88,7 @@ public class ClientRegisterActivity extends AppCompatActivity {
                                 loadingBar.dismiss();
                                 Intent openLoginActivity = new Intent(ClientRegisterActivity.this, LoginActivity.class);
                                 startActivity(openLoginActivity);
+                                finishAndRemoveTask();
                             } else {
                                 loadingBar.dismiss();
                                 Toast.makeText(ClientRegisterActivity.this, "Network error, please try again", Toast.LENGTH_LONG).show();
@@ -92,7 +96,7 @@ public class ClientRegisterActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    Toast.makeText(ClientRegisterActivity.this, "This " + phone + " already exists", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClientRegisterActivity.this, "This " + username + " already exists", Toast.LENGTH_LONG).show();
                     loadingBar.dismiss();
                     Toast.makeText(ClientRegisterActivity.this, "Please try again using another phone", Toast.LENGTH_LONG).show();
                     Intent openMainActivity = new Intent(ClientRegisterActivity.this, MainActivity.class);

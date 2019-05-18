@@ -1,5 +1,6 @@
 package com.onlineshop;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -30,7 +31,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class AddProductActivity extends AppCompatActivity {
-    private String CategoryName, Description, Price, ProductName, saveCurrentDate, saveCurrentTime;
+    private String CategoryName, Description, Price, productName, saveCurrentDate, saveCurrentTime;
     private ImageView InputProductImage;
     private EditText InputProductName, InputProductDescription, InputProductPrice;
     private static final int GalleryPick = 1;
@@ -89,11 +90,10 @@ public class AddProductActivity extends AppCompatActivity {
         }
     }
 
-
     private void ValidateProductData() {
         Description = InputProductDescription.getText().toString();
         Price = InputProductPrice.getText().toString();
-        ProductName = InputProductName.getText().toString();
+        productName = InputProductName.getText().toString();
 
         if (ImageUri == null) {
             Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show();
@@ -101,7 +101,7 @@ public class AddProductActivity extends AppCompatActivity {
             Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(Price)) {
             Toast.makeText(this, "Please write product Price...", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(ProductName)) {
+        } else if (TextUtils.isEmpty(productName)) {
             Toast.makeText(this, "Please write product name...", Toast.LENGTH_SHORT).show();
         } else {
             StoreProductInformation();
@@ -110,15 +110,15 @@ public class AddProductActivity extends AppCompatActivity {
 
     private void StoreProductInformation() {
         loadingBar.setTitle("Add New Product");
-        loadingBar.setMessage("Dear Admin, please wait while we are adding the new product.");
+        loadingBar.setMessage("Dear Seller, please wait while we are adding the new product.");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
         Calendar calendar = Calendar.getInstance();
 
-        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat currentDate = new SimpleDateFormat("MM/dd/yyyy");
         saveCurrentDate = currentDate.format(calendar.getTime());
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
         saveCurrentTime = currentTime.format(calendar.getTime());
         productRandomKey = saveCurrentDate + saveCurrentTime;
         final StorageReference filePath = ProductImagesRef.child(ImageUri.getLastPathSegment() + productRandomKey + ".jpg");
@@ -135,7 +135,6 @@ public class AddProductActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Toast.makeText(AddProductActivity.this, "Product Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
-
                 Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
                     public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -171,7 +170,7 @@ public class AddProductActivity extends AppCompatActivity {
         productMap.put("image", downloadImageUrl);
         productMap.put("category", CategoryName);
         productMap.put("price", Price);
-        productMap.put("productName", ProductName);
+        productMap.put("productName", productName);
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

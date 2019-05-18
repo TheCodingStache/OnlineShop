@@ -25,7 +25,7 @@ import com.onlineshop.Prevalent.Prevalent;
 import io.paperdb.Paper;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText phone;
+    private EditText username;
     private EditText password;
     private ProgressDialog loadingBar;
     private String parentDatabaseName = "Users";
@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        phone = findViewById(R.id.phone);
+        username = findViewById(R.id.phone);
         password = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         loadingBar = new ProgressDialog(this);
@@ -74,9 +74,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void UserLogin() {
-        String mobilePhone = phone.getText().toString();
+        String name = username.getText().toString();
         String pass = password.getText().toString();
-        if (TextUtils.isEmpty(mobilePhone)) {
+        if (TextUtils.isEmpty(name)) {
             Toast.makeText(this, "Please write your mobile phone...", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(pass)) {
             Toast.makeText(this, "Please write your password...", Toast.LENGTH_LONG).show();
@@ -85,13 +85,13 @@ public class LoginActivity extends AppCompatActivity {
             loadingBar.setMessage("Please wait while we are checking the credentials");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
-            allowAccessToAccount(mobilePhone, pass);
+            allowAccessToAccount(name, pass);
         }
     }
 
-    private void allowAccessToAccount(final String phone, final String password) {
+    private void allowAccessToAccount(final String username, final String password) {
         if (checkBox.isChecked()) {
-            Paper.book().write(Prevalent.Userphone, phone);
+            Paper.book().write(Prevalent.Username, username);
             Paper.book().write(Prevalent.UserPasswordKey, password);
         }
         final DatabaseReference RootRef;
@@ -99,10 +99,10 @@ public class LoginActivity extends AppCompatActivity {
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child(parentDatabaseName).child(phone).exists()) {
-                    Users userData = dataSnapshot.child(parentDatabaseName).child(phone).getValue(Users.class);
+                if (dataSnapshot.child(parentDatabaseName).child(username).exists()) {
+                    Users userData = dataSnapshot.child(parentDatabaseName).child(username).getValue(Users.class);
                     assert userData != null;
-                    if (userData.getPhone().equals(phone) && userData.getPassword().equals(password)) {
+                    if (userData.getPhone().equals(username) && userData.getPassword().equals(password)) {
                             if (parentDatabaseName.equals("Admins")) {
                                 Toast.makeText(LoginActivity.this, "Hello seller! You logged in successfully!", Toast.LENGTH_LONG).show();
                                 loadingBar.dismiss();
@@ -121,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Wrong password", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(LoginActivity.this, "Account with this" + phone + "number doesn't exists.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Account with this" + username + "number doesn't exists.", Toast.LENGTH_LONG).show();
                         loadingBar.dismiss();
                     }
                 }

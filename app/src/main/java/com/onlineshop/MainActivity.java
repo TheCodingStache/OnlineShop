@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(register);
             }
         });
-        String userPhone = Paper.book().read(Prevalent.Userphone);
+        String userPhone = Paper.book().read(Prevalent.Username);
         String passwordKey = Paper.book().read(Prevalent.UserPasswordKey);
         if (userPhone != null && passwordKey != null) {
             if (!TextUtils.isEmpty(userPhone) && !TextUtils.isEmpty(passwordKey)) {

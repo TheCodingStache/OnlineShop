@@ -16,6 +16,7 @@
     <string name="seller_panel">Im a Seller</string>
     <string name="client_panel">Im a client</string>
     <string name="linear_layout_1"></string>
+    <string name="user_profile_name">Username</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

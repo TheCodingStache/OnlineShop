@@ -19,14 +19,15 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".Client.ClientRegisterActivity" />
-        <activity android:name=".Prevalent.CategoryActivity"/>
-        <activity android:name=".SelectUserOptionActivity"/>
-        <activity android:name=".Seller.SellerRegisterActivity"/>
+        <activity android:name=".Prevalent.CategoryActivity" />
+        <activity android:name=".SelectUserOptionActivity" />
+        <activity android:name=".Seller.SellerRegisterActivity" />
     </application>
 
 </manifest>

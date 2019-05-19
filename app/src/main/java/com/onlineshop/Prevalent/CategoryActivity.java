@@ -23,6 +23,11 @@ public class CategoryActivity extends AppCompatActivity {
         ImageView femaleDresses = findViewById(R.id.female_dresses);
         ImageView sweaters = findViewById(R.id.sweaters);
 
+        ImageView glasses = findViewById(R.id.glasses);
+        ImageView hatsCaps = findViewById(R.id.hats_caps);
+        ImageView walletsBagsPurses = findViewById(R.id.purses_bags_wallets);
+        ImageView shoes = findViewById(R.id.shoes);
+
         tShirts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +62,51 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
-                intent.putExtra("category", "Sweathers");
+                intent.putExtra("category", "Sweaters");
+                startActivity(intent);
+            }
+        });
+
+        glasses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
+                intent.putExtra("category", "Glasses");
+                startActivity(intent);
+            }
+        });
+
+
+        hatsCaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
+                intent.putExtra("category", "Hats Caps");
+                startActivity(intent);
+            }
+        });
+
+
+
+        walletsBagsPurses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
+                intent.putExtra("category", "Wallets Bags Purses");
+                startActivity(intent);
+            }
+        });
+
+
+        shoes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
+                intent.putExtra("category", "Shoes");
                 startActivity(intent);
             }
         });

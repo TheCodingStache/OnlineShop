@@ -17,17 +17,21 @@
         android:src="@drawable/profile"
         android:layout_width="96dp"
         android:layout_height="96dp"
+        android:layout_gravity="center"
         android:paddingTop="2dp"
         app:civ_border_width="2dp"
         app:civ_border_color="@android:color/white"
         app:srcCompat="@mipmap/ic_launcher_round" />
 
     <TextView
+        android:id="@+id/user_profile_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/username"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:text="@string/user_profile_name"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="18sp" />
 
 
 

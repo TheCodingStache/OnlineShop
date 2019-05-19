@@ -45,46 +45,46 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(register);
             }
         });
-        String userPhone = Paper.book().read(Prevalent.Username);
-        String passwordKey = Paper.book().read(Prevalent.UserPasswordKey);
-        if (userPhone != null && passwordKey != null) {
-            if (!TextUtils.isEmpty(userPhone) && !TextUtils.isEmpty(passwordKey)) {
-                AllowAccess(userPhone, passwordKey);
-                loadingBar.setTitle("Already Logged in");
-                loadingBar.setMessage("Please wait...");
-                loadingBar.setCanceledOnTouchOutside(false);
-                loadingBar.show();
-            }
-        }
-    }
-
-    private void AllowAccess(final String phone, final String password) {
-        final DatabaseReference RootRef;
-        RootRef = FirebaseDatabase.getInstance().getReference().child("posts");
-        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("Users").child(phone).exists()) {
-                    Users userData = dataSnapshot.child("Users").child(phone).getValue(Users.class);
-                    assert userData != null;
-                    if (userData.getPhone().equals(phone)) {
-                        if (userData.getPassword().equals(password)) {
-                            Toast.makeText(MainActivity.this, "Logged in successfully!", Toast.LENGTH_LONG).show();
-                            loadingBar.dismiss();
-                            Intent openHomeActivity = new Intent(MainActivity.this, HomeActivity.class);
-                            startActivity(openHomeActivity);
-                        }
-                    }
-                } else {
-                    Toast.makeText(MainActivity.this, "Account with this " + phone + " number do not exist", Toast.LENGTH_LONG).show();
-                    loadingBar.dismiss();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        String username = Paper.book().read(Prevalent.Username);
+//        String passwordKey = Paper.book().read(Prevalent.UserPasswordKey);
+//        if (username != null && passwordKey != null) {
+//            if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(passwordKey)) {
+//                AllowAccess(username, passwordKey);
+//                loadingBar.setTitle("Already Logged in");
+//                loadingBar.setMessage("Please wait...");
+//                loadingBar.setCanceledOnTouchOutside(false);
+//                loadingBar.show();
+//            }
+//        }
+//    }
+//
+//    private void AllowAccess(final String username, final String password) {
+//        final DatabaseReference RootRef;
+//        RootRef = FirebaseDatabase.getInstance().getReference().child("Users");
+//        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.child("Users").child(username).exists()) {
+//                    Users userData = dataSnapshot.child("Users").child(username).getValue(Users.class);
+//                    if (userData.getUsername() != null && userData.getUsername().equals(username)) {
+//                        if (userData.getPassword().equals(password)) {
+//                            Toast.makeText(MainActivity.this, "Logged in successfully!", Toast.LENGTH_LONG).show();
+//                            loadingBar.dismiss();
+//                            Intent openHomeActivity = new Intent(MainActivity.this, HomeActivity.class);
+//                            Prevalent.currentOnlineUser = userData;
+//                            startActivity(openHomeActivity);
+//                        }
+//                    }
+//                }  else {
+//                    Toast.makeText(MainActivity.this, "Account with this " + username + " number do not exist", Toast.LENGTH_LONG).show();
+//                    loadingBar.dismiss();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
     }
 }

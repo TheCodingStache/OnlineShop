@@ -109,12 +109,14 @@ public class LoginActivity extends AppCompatActivity {
                                 loadingBar.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, CategoryActivity.class);
                                 startActivity(intent);
+                                finish();
                             } else if (parentDatabaseName.equals("Clients")) {
                                 Toast.makeText(LoginActivity.this, "logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 Prevalent.currentOnlineUser = usersData;
                                 startActivity(intent);
+                                finish();
                             }
                         } else {
                             loadingBar.dismiss();

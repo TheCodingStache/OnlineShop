@@ -1,12 +1,12 @@
 package com.onlineshop.Model;
 
 public class Products {
-    private String productName, description, shippingCost, image, category, pid, date, time;
+    private String pname, description, shipping, image, category, pid, date, time;
 
-    public Products(String productName, String description, String shippingCost, String image, String category, String pid, String date, String time) {
-        this.productName = productName;
+    public Products(String pname, String description, String shipping, String image, String category, String pid, String date, String time) {
+        this.pname = pname;
         this.description = description;
-        this.shippingCost = shippingCost;
+        this.shipping = shipping;
         this.image = image;
         this.category = category;
         this.pid = pid;
@@ -18,12 +18,12 @@ public class Products {
 
     }
 
-    public String getProductName() {
-        return productName;
+    public String getPname() {
+        return pname;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setPname(String pname) {
+        this.pname = pname;
     }
 
     public String getDescription() {
@@ -34,12 +34,12 @@ public class Products {
         this.description = description;
     }
 
-    public String getShippingCost() {
-        return shippingCost;
+    public String getShipping() {
+        return shipping;
     }
 
-    public void setShippingCost(String shippingCost) {
-        this.shippingCost = shippingCost;
+    public void setShipping(String shipping) {
+        this.shipping = shipping;
     }
 
     public String getImage() {

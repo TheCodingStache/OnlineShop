@@ -27,6 +27,7 @@ public class SelectUserOptionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent openSellerRegistration = new Intent(SelectUserOptionActivity.this, SellerRegisterActivity.class);
                 startActivity(openSellerRegistration);
+                finishAndRemoveTask();
             }
         });
         client.setOnClickListener(new View.OnClickListener() {
@@ -35,6 +36,7 @@ public class SelectUserOptionActivity extends AppCompatActivity {
                 Intent openClientRegistration = new Intent(SelectUserOptionActivity.this, ClientRegisterActivity.class);
                 startActivity(openClientRegistration);
                 finish();
+                finishAndRemoveTask();
             }
         });
     }

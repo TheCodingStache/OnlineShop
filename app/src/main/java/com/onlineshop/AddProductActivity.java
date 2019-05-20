@@ -35,7 +35,7 @@ public class AddProductActivity extends AppCompatActivity {
     private static final int GalleryPick = 1;
     private Uri ImageUri;
     private String downloadImageUrl;
-    private String productRandomKey = "a";
+    private String productRandomKey;
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
@@ -117,7 +117,7 @@ public class AddProductActivity extends AppCompatActivity {
 
         SimpleDateFormat currentDate = new SimpleDateFormat("MM dd yyyy");
         saveCurrentDate = currentDate.format(calendar.getTime());
-        SimpleDateFormat currentTime = new SimpleDateFormat(" HH:mm:ss a");
+        SimpleDateFormat currentTime = new SimpleDateFormat(" HH:mm:ss");
         saveCurrentTime = currentTime.format(calendar.getTime());
         productRandomKey = saveCurrentDate + saveCurrentTime;
         final StorageReference filePath = ProductImagesRef.child(ImageUri.getLastPathSegment() + productRandomKey + ".jpg");

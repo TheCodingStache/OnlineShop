@@ -4,7 +4,7 @@ import com.onlineshop.Model.Users;
 
 public class Prevalent {
     public static Users currentOnlineUser;
-    public static final String Username = "Username";
+    public static final String Username = "UserName";
     public static final String UserPasswordKey = "UserPassword";
 
 }

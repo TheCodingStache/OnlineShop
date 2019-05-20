@@ -71,7 +71,7 @@ public class SellerRegisterActivity extends AppCompatActivity {
 
     private void ValidateEmail(final String username, final String phone, final String password) {
         final DatabaseReference RootRef;
-        RootRef = FirebaseDatabase.getInstance().getReference().child("Shop");
+        RootRef = FirebaseDatabase.getInstance().getReference();
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

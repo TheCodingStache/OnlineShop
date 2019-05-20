@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText username;
     private EditText password;
     private ProgressDialog loadingBar;
-    private String parentDatabaseName = "Users";
+    private String parentDatabaseName = "Clients";
     private CheckBox checkBox;
     private TextView sellerPanel;
     private TextView clientPanel;
@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                loginButton.setText("Seller log in");
+                loginButton.setText("Giveawayer Login");
                 sellerPanel.setVisibility(View.INVISIBLE);
                 clientPanel.setVisibility(View.VISIBLE);
                 parentDatabaseName = "Sellers";
@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                loginButton.setText("Client log in");
+                loginButton.setText("Client Login");
                 clientPanel.setVisibility(View.INVISIBLE);
                 sellerPanel.setVisibility(View.VISIBLE);
                 parentDatabaseName = "Clients";
@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
             Paper.book().write(Prevalent.UserPasswordKey, password);
         }
         final DatabaseReference RootRef;
-        RootRef = FirebaseDatabase.getInstance().getReference().child("Shop");
+        RootRef = FirebaseDatabase.getInstance().getReference();
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

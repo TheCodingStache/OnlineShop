@@ -3,15 +3,39 @@ package com.onlineshop.Prevalent;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.onlineshop.AddProductActivity;
 import com.onlineshop.R;
 
+import io.paperdb.Paper;
+
 @SuppressLint("Registered")
 public class CategoryActivity extends AppCompatActivity {
+    private boolean doubleBackToExitPressedOnce = false;
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            Paper.book().destroy();
+            finish();
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click back again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +51,10 @@ public class CategoryActivity extends AppCompatActivity {
         ImageView hatsCaps = findViewById(R.id.hats_caps);
         ImageView walletsBagsPurses = findViewById(R.id.purses_bags_wallets);
         ImageView shoes = findViewById(R.id.shoes);
+
+        ImageView pants = findViewById(R.id.trousers);
+        ImageView shorts = findViewById(R.id.shorts);
+
 
         tShirts.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +101,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         glasses.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "Glasses");
                 startActivity(intent);
@@ -85,8 +112,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         hatsCaps.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "Hats Caps");
                 startActivity(intent);
@@ -95,11 +121,9 @@ public class CategoryActivity extends AppCompatActivity {
         });
 
 
-
         walletsBagsPurses.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "Wallets Bags Purses");
                 startActivity(intent);
@@ -110,10 +134,29 @@ public class CategoryActivity extends AppCompatActivity {
 
         shoes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "Shoes");
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        pants.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
+                intent.putExtra("category", "Pants");
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        shorts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
+                intent.putExtra("category", "Shorts");
                 startActivity(intent);
                 finish();
             }

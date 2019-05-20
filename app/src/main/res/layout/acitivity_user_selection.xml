@@ -20,11 +20,12 @@
         android:layout_marginTop="350dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
+        android:fontFamily="@font/raleway"
         android:padding="17dp"
-        android:text="@string/create_seller"
+        android:text="@string/create_giveawayer"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/client"
@@ -35,9 +36,10 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
+        android:fontFamily="@font/raleway"
         android:padding="17dp"
         android:text="@string/create_client"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 </RelativeLayout>

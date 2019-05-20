@@ -9,7 +9,7 @@ import com.onlineshop.Interface.ItemClickListener;
 import com.onlineshop.R;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    public TextView txtProductName, txtProductDescription, txtProductPrice;
+    public TextView txtProductName, txtProductDescription, txtProductPrice, txtProductAddress;
     public ImageView imageView;
     public ItemClickListener listener;
 
@@ -20,6 +20,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         txtProductName = itemView.findViewById(R.id.product_name);
         txtProductDescription = itemView.findViewById(R.id.product_description);
         txtProductPrice = itemView.findViewById(R.id.product_price);
+        txtProductAddress = itemView.findViewById(R.id.product_address);
 
     }
 

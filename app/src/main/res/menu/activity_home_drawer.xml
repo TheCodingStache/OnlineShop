@@ -7,23 +7,28 @@
         <item
             android:id="@+id/nav_cart"
             android:icon="@drawable/nav_cart"
-            android:title="Import" />
+            android:title="Import"
+            />
         <item
             android:id="@+id/nav_orders"
             android:icon="@drawable/orders"
-            android:title="Orders" />
+            android:title="Orders"
+            />
         <item
             android:id="@+id/categories"
             android:icon="@drawable/category"
-            android:title="Categories" />
+            android:title="Categories"
+            />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Settings" />
+            android:title="Settings"
+            />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"
-            android:title="@string/logout" />
+            android:title="@string/logout"
+            />
     </group>
 
 </menu>

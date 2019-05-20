@@ -11,10 +11,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:text="Please, add a new product!"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/raleway"
+        android:text="Welcome back Giveawayer! Please, add your product"
         android:textAlignment="center"
-        android:textSize="28sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
@@ -24,11 +25,13 @@
         android:layout_below="@+id/slogan_category"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="80dp"
-        android:text="Choose a category!"
+        android:layout_marginTop="110dp"
+        android:fontFamily="@font/raleway"
+        android:text="Choose an item to Giveaway!"
         android:textAlignment="center"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
+
     <TextView
         android:id="@+id/tops"
         android:layout_width="match_parent"
@@ -36,10 +39,11 @@
         android:layout_below="@+id/choose"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="150dp"
-        android:text="Tops/Dresses/Coats"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/raleway"
+        android:text="Tops | Dresses | Coats"
         android:textAlignment="center"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
 
@@ -88,11 +92,11 @@
         android:layout_below="@+id/linear1_category_layout"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="320dp"
-        android:text="Accessories/Shoes"
+        android:layout_marginTop="340dp"
+        android:fontFamily="@font/raleway"
+        android:text="Accessories | Shoes"
         android:textAlignment="center"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -133,6 +137,48 @@
             android:src="@drawable/shoess"
             android:layout_marginStart="16dp"
             />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/pants"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear3_category_layout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-6dp"
+        android:layout_marginTop="503dp"
+        android:fontFamily="@font/raleway"
+        android:text="Trousers | shorts"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/linear3_category_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear2_category_layout"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="80dp">
+
+        <ImageView
+            android:id="@+id/trousers"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/pants"
+            />
+
+        <ImageView
+            android:id="@+id/shorts"
+            android:layout_width="60dp"
+            android:layout_height="90dp"
+            android:src="@drawable/shorts"
+            />
+
 
     </LinearLayout>
 </RelativeLayout>

@@ -1,4 +1,5 @@
 package com.onlineshop;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -29,9 +30,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class AddProductActivity extends AppCompatActivity {
-    private String CategoryName, Description, shippingCost, productName, saveCurrentDate, saveCurrentTime;
+    private String CategoryName, Description, shippingCost, productName, productAddress, saveCurrentDate, saveCurrentTime;
     private ImageView InputProductImage;
-    private EditText InputProductName, InputProductDescription, InputProductPrice;
+    private EditText InputProductName, InputProductDescription, InputProductPrice, InputProductAddress;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
     private String downloadImageUrl;
@@ -55,6 +56,7 @@ public class AddProductActivity extends AppCompatActivity {
         InputProductName = findViewById(R.id.product_name);
         InputProductDescription = findViewById(R.id.product_description);
         InputProductPrice = findViewById(R.id.product_price);
+        InputProductAddress = findViewById(R.id.product_address);
         loadingBar = new ProgressDialog(this);
 
         InputProductImage.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +95,7 @@ public class AddProductActivity extends AppCompatActivity {
         Description = InputProductDescription.getText().toString();
         shippingCost = InputProductPrice.getText().toString();
         productName = InputProductName.getText().toString();
+        productAddress = InputProductAddress.getText().toString();
 
         if (ImageUri == null) {
             Toast.makeText(this, "Product image is mandatory...", Toast.LENGTH_SHORT).show();
@@ -102,6 +105,8 @@ public class AddProductActivity extends AppCompatActivity {
             Toast.makeText(this, "Please write product description...", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(shippingCost)) {
             Toast.makeText(this, "Please write product shipping cost...", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(productAddress)) {
+            Toast.makeText(this, "Please write product address...", Toast.LENGTH_SHORT).show();
         } else {
             StoreProductInformation();
         }
@@ -168,6 +173,7 @@ public class AddProductActivity extends AppCompatActivity {
         productMap.put("category", CategoryName);
         productMap.put("shipping", shippingCost);
         productMap.put("pname", productName);
+        productMap.put("address", productAddress);
 
         ProductsRef.child(productRandomKey).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -176,7 +182,7 @@ public class AddProductActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(AddProductActivity.this, CategoryActivity.class);
                             startActivity(intent);
-                            finish();
+                            finishAfterTransition();
                             loadingBar.dismiss();
                             Toast.makeText(AddProductActivity.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         } else {

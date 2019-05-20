@@ -34,6 +34,7 @@ public class CategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "tShirts");
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -44,6 +45,7 @@ public class CategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "Sports tShirts");
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -54,6 +56,7 @@ public class CategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "Female Dresses");
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -64,6 +67,7 @@ public class CategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "Sweaters");
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -74,6 +78,7 @@ public class CategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "Glasses");
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -85,6 +90,7 @@ public class CategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "Hats Caps");
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -97,6 +103,7 @@ public class CategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "Wallets Bags Purses");
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -108,6 +115,7 @@ public class CategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "Shoes");
                 startActivity(intent);
+                finish();
             }
         });
 

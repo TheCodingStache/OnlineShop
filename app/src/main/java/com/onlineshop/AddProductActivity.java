@@ -34,7 +34,8 @@ public class AddProductActivity extends AppCompatActivity {
     private EditText InputProductName, InputProductDescription, InputProductPrice;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
-    private String productRandomKey ="Info", downloadImageUrl;
+    private String downloadImageUrl;
+    private String productRandomKey = "a";
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
@@ -114,11 +115,11 @@ public class AddProductActivity extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
 
-        SimpleDateFormat currentDate = new SimpleDateFormat("MM/dd/yyyy ");
+        SimpleDateFormat currentDate = new SimpleDateFormat("MM dd yyyy");
         saveCurrentDate = currentDate.format(calendar.getTime());
-//        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
-//        saveCurrentTime = currentTime.format(calendar.getTime());
-//        productRandomKey = saveCurrentDate;
+        SimpleDateFormat currentTime = new SimpleDateFormat(" HH:mm:ss a");
+        saveCurrentTime = currentTime.format(calendar.getTime());
+        productRandomKey = saveCurrentDate + saveCurrentTime;
         final StorageReference filePath = ProductImagesRef.child(ImageUri.getLastPathSegment() + productRandomKey + ".jpg");
         final UploadTask uploadTask = filePath.putFile(ImageUri);
 
@@ -175,6 +176,7 @@ public class AddProductActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(AddProductActivity.this, CategoryActivity.class);
                             startActivity(intent);
+                            finish();
                             loadingBar.dismiss();
                             Toast.makeText(AddProductActivity.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         } else {

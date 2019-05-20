@@ -105,13 +105,13 @@ public class LoginActivity extends AppCompatActivity {
                     if (usersData.getUsername() != null && usersData.getUsername().equals(username)) {
                         if (usersData.getPassword().equals(password)) {
                             if (parentDatabaseName.equals("Sellers")) {
-                                Toast.makeText(LoginActivity.this, "Welcome Admin, you are logged in Successfully...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Welcome Giveawayer!, you logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, CategoryActivity.class);
                                 startActivity(intent);
                                 finish();
                             } else if (parentDatabaseName.equals("Clients")) {
-                                Toast.makeText(LoginActivity.this, "logged in Successfully...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Welcome Client, you logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 Prevalent.currentOnlineUser = usersData;

@@ -59,6 +59,9 @@ public class ClientRegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Please write your phone number...", Toast.LENGTH_LONG).show();
         } else if (TextUtils.isEmpty(pass)) {
             Toast.makeText(this, "Please write your password...", Toast.LENGTH_LONG).show();
+        } else if (password.length() < 6) {
+            password.setError("Password should be at least 6 character long");
+            password.requestFocus();
         } else {
             loadingBar.setTitle("Create Account");
             loadingBar.setMessage("Please wait while we are checking the credentials");

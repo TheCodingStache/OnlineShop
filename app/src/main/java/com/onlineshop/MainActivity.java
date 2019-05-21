@@ -22,7 +22,6 @@ import com.onlineshop.Prevalent.Prevalent;
 import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity {
-    private Button joinNowButton, loginButton;
     private ProgressDialog loadingBar;
 
 
@@ -32,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        joinNowButton = findViewById(R.id.main_register_button);
-        loginButton = findViewById(R.id.main_login_button);
+        Button joinNowButton = findViewById(R.id.main_register_button);
+        Button loginButton = findViewById(R.id.main_login_button);
         loadingBar = new ProgressDialog(this);
 
 

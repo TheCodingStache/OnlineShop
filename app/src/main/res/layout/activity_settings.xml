@@ -82,8 +82,9 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
-        android:fontFamily="@font/raleway"
+        android:fontFamily="monospace"
         android:hint="Phone Number..."
+        android:inputType="phone"
         android:padding="10dp" />
 
     <EditText
@@ -95,8 +96,9 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
-        android:fontFamily="@font/raleway"
+        android:fontFamily="monospace"
         android:hint="Full Name..."
+        android:inputType="text"
         android:padding="10dp" />
 
     <EditText
@@ -108,8 +110,9 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
-        android:fontFamily="@font/raleway"
+        android:fontFamily="monospace"
         android:hint="Address..."
+        android:inputType="text"
         android:padding="10dp" />
 
 </RelativeLayout>

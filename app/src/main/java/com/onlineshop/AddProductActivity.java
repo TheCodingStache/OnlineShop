@@ -182,7 +182,7 @@ public class AddProductActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(AddProductActivity.this, CategoryActivity.class);
                             startActivity(intent);
-                            finishAfterTransition();
+                            finish();
                             loadingBar.dismiss();
                             Toast.makeText(AddProductActivity.this, "Product is added successfully..", Toast.LENGTH_SHORT).show();
                         } else {

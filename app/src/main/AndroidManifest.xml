@@ -14,23 +14,41 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar">
-            android
-        </activity>
-        <activity android:name=".AddProductActivity" />
-        <activity android:name=".MainActivity">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".AddProductActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SettingsActivity"/>
-        <activity android:name=".Client.ClientRegisterActivity" />
-        <activity android:name=".Prevalent.CategoryActivity" />
-        <activity android:name=".SelectUserOptionActivity" />
-        <activity android:name=".Seller.SellerRegisterActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Client.ClientRegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Prevalent.CategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SelectUserOptionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Seller.SellerRegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
 
         <meta-data
             android:name="preloaded_fonts"

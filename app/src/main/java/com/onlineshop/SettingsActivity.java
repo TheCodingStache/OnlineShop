@@ -95,15 +95,15 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     private void updateOnlyUserInfo() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Profile");
 
         HashMap<String, Object> userMap = new HashMap<>();
         userMap.put("name", fullNameEditText.getText().toString());
         userMap.put("address", addressEditText.getText().toString());
         userMap.put("phoneOrder", userPhoneEditText.getText().toString());
-        ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
+        ref.child(Prevalent.currentOnlineUser.getUsername()).updateChildren(userMap);
 
-        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
         Toast.makeText(SettingsActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -149,7 +149,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         if (imageUri != null) {
             final StorageReference fileRef = storageProfilePictureRef
-                    .child(Prevalent.currentOnlineUser.getPhone() + ".jpg");
+                    .child(Prevalent.currentOnlineUser.getUsername() + ".jpg");
 
             StorageTask uploadTask = fileRef.putFile(imageUri);
 
@@ -170,18 +170,18 @@ public class SettingsActivity extends AppCompatActivity {
                                 Uri downloadUrl = task.getResult();
                                 myUrl = downloadUrl.toString();
 
-                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Profile");
 
                                 HashMap<String, Object> userMap = new HashMap<>();
                                 userMap.put("name", fullNameEditText.getText().toString());
                                 userMap.put("address", addressEditText.getText().toString());
                                 userMap.put("phoneOrder", userPhoneEditText.getText().toString());
                                 userMap.put("image", myUrl);
-                                ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
+                                ref.child(Prevalent.currentOnlineUser.getUsername()).updateChildren(userMap);
 
                                 progressDialog.dismiss();
 
-                                startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                                startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
                                 Toast.makeText(SettingsActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
@@ -197,7 +197,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     private void userInfoDisplay(final CircleImageView profileImageView, final EditText fullNameEditText, final EditText userPhoneEditText, final EditText addressEditText) {
-        DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Users").child(Prevalent.currentOnlineUser.getPhone());
+        DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Profile").child(Prevalent.currentOnlineUser.getUsername());
 
         UsersRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -206,9 +206,8 @@ public class SettingsActivity extends AppCompatActivity {
                     if (dataSnapshot.child("image").exists()) {
                         String image = dataSnapshot.child("image").getValue().toString();
                         String name = dataSnapshot.child("name").getValue().toString();
-                        String phone = dataSnapshot.child("phone").getValue().toString();
+                        String phone = dataSnapshot.child("phoneOrder").getValue().toString();
                         String address = dataSnapshot.child("address").getValue().toString();
-
                         Picasso.get().load(image).into(profileImageView);
                         fullNameEditText.setText(name);
                         userPhoneEditText.setText(phone);

@@ -24,7 +24,6 @@ public class CategoryActivity extends AppCompatActivity {
         if (doubleBackToExitPressedOnce) {
             Paper.book().destroy();
             finish();
-            openLogin();
         }
 
         this.doubleBackToExitPressedOnce = true;
@@ -37,11 +36,6 @@ public class CategoryActivity extends AppCompatActivity {
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
-    }
-    public void openLogin(){
-        Intent intent = new Intent(CategoryActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -59,16 +59,24 @@ public class MainActivity extends AppCompatActivity {
 
         String Username = Paper.book().read(Prevalent.Username);
         String UserPasswordKey = Paper.book().read(Prevalent.UserPasswordKey);
-
+//        String UsernameSeller = Paper.book().read(Prevalent.Username);
+//        String UserPasswordKeySell = Paper.book().read(Prevalent.UserPasswordKey);
         if (Username != "" && UserPasswordKey != "") {
             if (!TextUtils.isEmpty(Username) && !TextUtils.isEmpty(UserPasswordKey)) {
                 AllowClientAccess(Username, UserPasswordKey);
-                AllowGiveawayAccess(Username, UserPasswordKey);
                 loadingBar.setTitle("Already Logged in");
                 loadingBar.setMessage("Please wait.....");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
             }
+//        } else if (UsernameSeller != "" && UserPasswordKeySell != "") {
+//            if (!TextUtils.isEmpty(UsernameSeller) && !TextUtils.isEmpty(UserPasswordKeySell)) {
+//                AllowGiveawayAccess(UsernameSeller, UserPasswordKeySell);
+//                loadingBar.setTitle("Already Logged in");
+//                loadingBar.setMessage("Please wait.....");
+//                loadingBar.setCanceledOnTouchOutside(false);
+//                loadingBar.show();
+//            }
         }
     }
 
@@ -85,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
                         if (usersData.getPassword().equals(password)) {
                             Toast.makeText(MainActivity.this, "Please wait, you are already logged in...", Toast.LENGTH_SHORT).show();
                             loadingBar.dismiss();
-
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                             Prevalent.currentOnlineUser = usersData;
                             startActivity(intent);
@@ -95,41 +102,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-                    Toast.makeText(MainActivity.this, "Account with this " + username + " number do not exists.", Toast.LENGTH_SHORT).show();
-                    loadingBar.dismiss();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    private void AllowGiveawayAccess(final String username, final String password) {
-        final DatabaseReference RootRef;
-        RootRef = FirebaseDatabase.getInstance().getReference();
-        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("Sellers").child(username).exists()) {
-                    Users usersData = dataSnapshot.child("Sellers").child(username).getValue(Users.class);
-                    if (usersData.getUsername().equals(username)) {
-                        if (usersData.getPassword().equals(password)) {
-                            Toast.makeText(MainActivity.this, "Please wait, you are already logged in...", Toast.LENGTH_SHORT).show();
-                            loadingBar.dismiss();
-
-                            Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
-                            Prevalent.currentOnlineUser = usersData;
-                            startActivity(intent);
-                        } else {
-                            loadingBar.dismiss();
-                            Toast.makeText(MainActivity.this, "Password is incorrect.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                } else {
-                    Toast.makeText(MainActivity.this, "Account with this " + username + " number do not exists.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Account with this " + username + " do not exists.", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                 }
             }
@@ -141,3 +114,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+//
+//    private void AllowGiveawayAccess(final String username, final String password) {
+//        final DatabaseReference RootRef;
+//        RootRef = FirebaseDatabase.getInstance().getReference();
+//        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.child("Sellers").child(username).exists()) {
+//                    Users usersData = dataSnapshot.child("Sellers").child(username).getValue(Users.class);
+//                    if (usersData.getUsername().equals(username)) {
+//                        if (usersData.getPassword().equals(password)) {
+//                            Toast.makeText(MainActivity.this, "Please wait, you are already logged in...", Toast.LENGTH_SHORT).show();
+//                            loadingBar.dismiss();
+//                            Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
+//                            Prevalent.currentOnlineUser = usersData;
+//                            startActivity(intent);
+//                        } else {
+//                            loadingBar.dismiss();
+//                            Toast.makeText(MainActivity.this, "Password is incorrect.", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                } else {
+//                    Toast.makeText(MainActivity.this, "Account with this " + username + " number do not exists.", Toast.LENGTH_SHORT).show();
+//                    loadingBar.dismiss();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }

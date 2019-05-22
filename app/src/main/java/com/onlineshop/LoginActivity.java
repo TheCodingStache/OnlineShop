@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                 sellerPanel.setVisibility(View.INVISIBLE);
                 clientPanel.setVisibility(View.VISIBLE);
                 parentDatabaseName = "Sellers";
+                checkBox.setVisibility(View.INVISIBLE);
             }
         });
         clientPanel.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 loginButton.setText("Client Login");
                 clientPanel.setVisibility(View.INVISIBLE);
                 sellerPanel.setVisibility(View.VISIBLE);
+                checkBox.setVisibility(View.VISIBLE);
                 parentDatabaseName = "Clients";
             }
         });
@@ -105,18 +107,17 @@ public class LoginActivity extends AppCompatActivity {
                     if (usersData.getUsername() != null && usersData.getUsername().equals(username)) {
                         if (usersData.getPassword().equals(password)) {
                             if (parentDatabaseName.equals("Sellers")) {
-                                Toast.makeText(LoginActivity.this, "Welcome Giveawayer!, you logged in Successfully...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Welcome Giveawayer! you logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, CategoryActivity.class);
+                                Prevalent.currentOnlineUser = usersData;
                                 startActivity(intent);
-                                finish();
                             } else if (parentDatabaseName.equals("Clients")) {
                                 Toast.makeText(LoginActivity.this, "Welcome Client, you logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 Prevalent.currentOnlineUser = usersData;
                                 startActivity(intent);
-                                finish();
                             }
                         } else {
                             loadingBar.dismiss();

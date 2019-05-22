@@ -169,18 +169,14 @@ public class SettingsActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Uri downloadUrl = task.getResult();
                                 myUrl = downloadUrl.toString();
-
                                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Profile");
-
                                 HashMap<String, Object> userMap = new HashMap<>();
                                 userMap.put("name", fullNameEditText.getText().toString());
                                 userMap.put("address", addressEditText.getText().toString());
                                 userMap.put("phoneOrder", userPhoneEditText.getText().toString());
                                 userMap.put("image", myUrl);
                                 ref.child(Prevalent.currentOnlineUser.getUsername()).updateChildren(userMap);
-
                                 progressDialog.dismiss();
-
                                 startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
                                 Toast.makeText(SettingsActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
                                 finish();

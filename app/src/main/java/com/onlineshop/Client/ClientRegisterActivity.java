@@ -91,7 +91,6 @@ public class ClientRegisterActivity extends AppCompatActivity {
                                 loadingBar.dismiss();
                                 Intent openLoginActivity = new Intent(ClientRegisterActivity.this, LoginActivity.class);
                                 startActivity(openLoginActivity);
-                                finishAndRemoveTask();
                             } else {
                                 loadingBar.dismiss();
                                 Toast.makeText(ClientRegisterActivity.this, "Network error, please try again", Toast.LENGTH_LONG).show();

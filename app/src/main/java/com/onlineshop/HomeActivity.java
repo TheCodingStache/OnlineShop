@@ -1,7 +1,9 @@
 package com.onlineshop;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -38,23 +40,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         ProductsRef.keepSynced(true);
-
         Paper.init(this);
-
-
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Home");
+        toolbar.setTitle("Welcome to Online Shop");
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,8 +71,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
         userNameTextView.setText(Prevalent.currentOnlineUser.getUsername());
         Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
-
-
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -97,12 +90,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
                     @SuppressLint("SetTextI18n")
                     @Override
-                    protected void onBindViewHolder(@NonNull ProductViewHolder holder, int position, @NonNull Products model) {
+                    protected void onBindViewHolder(@NonNull final ProductViewHolder holder, int position, @NonNull final Products model) {
                         holder.txtProductName.setText(model.getPname());
                         holder.txtProductDescription.setText(model.getDescription());
                         holder.txtProductPrice.setText("Shipping cost " + model.getShipping());
-                        holder.txtProductAddress.setText("Address: "+model.getAddress());
+                        holder.txtProductAddress.setText("Address: " + model.getAddress());
                         Picasso.get().load(model.getImage()).into(holder.imageView);
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent details = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                                details.putExtra("pid",model.getPid());
+                                details.putExtra("description", model.getDescription());
+                                details.putExtra("pname", model.getPname());
+                                startActivity(details);
+                            }
+                        });
                     }
 
                     @NonNull

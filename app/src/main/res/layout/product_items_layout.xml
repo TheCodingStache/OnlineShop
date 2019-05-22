@@ -39,7 +39,7 @@
             android:layout_below="@+id/product_image"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/raleway"
-            android:text="Shippinh=g Price"
+            android:text="Shippinhg Price"
             android:textAlignment="center"
             android:textColor="@android:color/holo_red_light"
             android:textSize="18sp" />

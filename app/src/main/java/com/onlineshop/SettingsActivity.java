@@ -56,8 +56,6 @@ public class SettingsActivity extends AppCompatActivity {
         TextView profileChangeTextBtn = findViewById(R.id.profile_image_change_btn);
         TextView closeTextBtn = findViewById(R.id.close_settings_btn);
         TextView saveTextButton = findViewById(R.id.update_account_settings_btn);
-
-
         userInfoDisplay(profileImageView, fullNameEditText, userPhoneEditText, addressEditText);
 
 
@@ -120,7 +118,6 @@ public class SettingsActivity extends AppCompatActivity {
             profileImageView.setImageURI(imageUri);
         } else {
             Toast.makeText(this, "Error, Try Again.", Toast.LENGTH_SHORT).show();
-
             startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
             finish();
         }

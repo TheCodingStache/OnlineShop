@@ -19,15 +19,17 @@ import com.squareup.picasso.Picasso;
 public class ProductDetailsActivity extends AppCompatActivity {
     private String productID = "";
     private ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collapse);
+        productID = getIntent().getStringExtra("pid");
         String collapseProductName = getIntent().getExtras().getString("pname");
         String collapseDescription = getIntent().getExtras().getString("description");
 //        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar_id);
 //        collapsingToolbarLayout.setTitleEnabled(true);
-        imageView = findViewById(R.id.product_image);
+        imageView = findViewById(R.id.collapse_product_image);
         TextView description = findViewById(R.id.product_description);
         TextView productName = findViewById(R.id.product_name);
         description.setText(collapseDescription);

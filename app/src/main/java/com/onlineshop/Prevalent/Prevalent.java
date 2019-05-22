@@ -1,6 +1,4 @@
 package com.onlineshop.Prevalent;
-
-import com.onlineshop.Model.Products;
 import com.onlineshop.Model.Users;
 
 public class Prevalent {

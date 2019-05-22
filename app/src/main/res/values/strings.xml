@@ -7,6 +7,16 @@
     <string name="phone">Phone Number</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
+    <string name="close">close</string>
+    <string name="update">update</string>
+    <string name="change_profile">Change profile</string>
+    <string name="phone_number">Phone number</string>
+    <string name="full_name">Full name</string>
+    <string name="product_name">product name</string>
+    <string name="product_description">product description</string>
+    <string name="shipping_cost">shipping cost</string>
+    <string name="add_product">add_product</string>
+    <string name="product_address">product_address</string>
     <string name="recover_password">Forgot Password?</string>
     <string name="client_login">Client Login</string>
     <string name="create_giveawayer">Proceed to register as a Giveawayer!</string>
@@ -16,7 +26,7 @@
     <string name="logout">Log out</string>
     <string name="seller_panel">Im a Giveawayer!</string>
     <string name="client_panel">Im a Client!</string>
-    <string name="linear_layout_1"></string>
+    <string name="linear_layout_1"> </string>
     <string name="user_profile_name">Username</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

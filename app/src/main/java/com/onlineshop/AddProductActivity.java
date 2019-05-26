@@ -25,11 +25,13 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.onlineshop.Prevalent.CategoryActivity;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
 public class AddProductActivity extends AppCompatActivity {
+    private Button checkOrders;
     private String CategoryName, Description, shippingCost, productName, productAddress, saveCurrentDate, saveCurrentTime;
     private ImageView InputProductImage;
     private EditText InputProductName, InputProductDescription, InputProductPrice, InputProductAddress;
@@ -41,6 +43,13 @@ public class AddProductActivity extends AppCompatActivity {
     private DatabaseReference ProductsRef;
     private ProgressDialog loadingBar;
 
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddProductActivity.this, CategoryActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +81,7 @@ public class AddProductActivity extends AppCompatActivity {
                 ValidateProductData();
             }
         });
+
     }
 
     private void OpenGallery() {
@@ -79,6 +89,7 @@ public class AddProductActivity extends AppCompatActivity {
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, GalleryPick);
+
     }
 
     @Override
@@ -145,7 +156,6 @@ public class AddProductActivity extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             throw task.getException();
                         }
-
                         downloadImageUrl = filePath.getDownloadUrl().toString();
                         return filePath.getDownloadUrl();
                     }

@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.onlineshop.AddProductActivity;
-import com.onlineshop.LoginActivity;
+import com.onlineshop.AdminCheckingOrders.AdminNewOrdersActivity;
 import com.onlineshop.R;
 
 import io.paperdb.Paper;
@@ -18,11 +19,11 @@ import io.paperdb.Paper;
 @SuppressLint("Registered")
 public class CategoryActivity extends AppCompatActivity {
     private boolean doubleBackToExitPressedOnce = false;
-
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             Paper.book().destroy();
+            finishActivity(R.layout.activity_category);
             finish();
         }
 
@@ -37,11 +38,12 @@ public class CategoryActivity extends AppCompatActivity {
             }
         }, 2000);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
-
+        Button checkOrders = findViewById(R.id.check_orders);
         ImageView tShirts = findViewById(R.id.t_shirts);
         ImageView sportsTShirts = findViewById(R.id.sports_t_shirts);
         ImageView femaleDresses = findViewById(R.id.female_dresses);
@@ -54,7 +56,6 @@ public class CategoryActivity extends AppCompatActivity {
 
         ImageView pants = findViewById(R.id.trousers);
         ImageView shorts = findViewById(R.id.shorts);
-
 
         tShirts.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +117,6 @@ public class CategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(CategoryActivity.this, AddProductActivity.class);
                 intent.putExtra("category", "Hats Caps");
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -162,5 +162,14 @@ public class CategoryActivity extends AppCompatActivity {
             }
         });
 
+        checkOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CategoryActivity.this, AdminNewOrdersActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }

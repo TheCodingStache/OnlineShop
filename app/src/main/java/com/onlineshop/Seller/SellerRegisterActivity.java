@@ -104,6 +104,7 @@ public class SellerRegisterActivity extends AppCompatActivity {
                     Toast.makeText(SellerRegisterActivity.this, "Please try again using another phone", Toast.LENGTH_LONG).show();
                     Intent openMainActivity = new Intent(SellerRegisterActivity.this, MainActivity.class);
                     startActivity(openMainActivity);
+                    finish();
                 }
             }
 

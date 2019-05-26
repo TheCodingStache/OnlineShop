@@ -19,7 +19,7 @@
             android:fontFamily="@font/raleway"
             android:text="Product Name"
             android:textAlignment="center"
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
             android:fontFamily="@font/raleway"
             android:text="Shippinhg Price"
             android:textAlignment="center"
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="@android:color/black"
             android:textSize="18sp" />
 
         <TextView
@@ -53,7 +53,7 @@
             android:fontFamily="@font/raleway"
             android:text="Product Description"
             android:textAlignment="center"
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="@android:color/black"
             android:textSize="18sp" />
 
         <TextView
@@ -65,7 +65,7 @@
             android:fontFamily="@font/raleway"
             android:text="Product Address"
             android:textAlignment="center"
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="@android:color/black"
             android:textSize="18sp" />
 
     </RelativeLayout>

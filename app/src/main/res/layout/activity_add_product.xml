@@ -93,6 +93,6 @@
         android:textSize="18sp"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:background="@android:color/holo_red_light"
+        android:background="@color/yellowGreen"
         />
 </RelativeLayout>

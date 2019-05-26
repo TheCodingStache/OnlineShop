@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.onlineshop">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ProductDetailsActivity"></activity>
+        <activity android:name=".AdminCheckingOrders.AdminUserProductActivity"></activity>
+        <activity
+            android:name=".AdminCheckingOrders.AdminNewOrdersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ConfirmFinalOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProductDetailsActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
@@ -49,8 +62,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name=".ProductDetailsActivity"></activity>
+        <activity
+            android:name=".ProductDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserCheckingOrders.UserNewOrdersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserCheckingOrders.UserProductActivity"
+            android:screenOrientation="portrait" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

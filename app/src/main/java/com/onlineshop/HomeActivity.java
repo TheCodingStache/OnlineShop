@@ -1,13 +1,10 @@
 package com.onlineshop;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,8 +25,10 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.onlineshop.AdminCheckingOrders.AdminNewOrdersActivity;
 import com.onlineshop.Model.Products;
 import com.onlineshop.Prevalent.Prevalent;
+import com.onlineshop.UserCheckingOrders.UserNewOrdersActivity;
 import com.onlineshop.ViewHolder.ProductViewHolder;
 import com.squareup.picasso.Picasso;
 
@@ -39,6 +38,7 @@ import io.paperdb.Paper;
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
+    private CircleImageView profileImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +50,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Welcome to Online Shop");
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.final_cart);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -68,9 +69,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
-        CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
+        profileImageView = headerView.findViewById(R.id.user_profile_image);
         userNameTextView.setText(Prevalent.currentOnlineUser.getUsername());
-        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).into(profileImageView);
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -96,14 +96,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         holder.txtProductPrice.setText("Shipping cost " + model.getShipping());
                         holder.txtProductAddress.setText("Address: " + model.getAddress());
                         Picasso.get().load(model.getImage()).into(holder.imageView);
+                        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).error(R.drawable.profile).centerCrop().into(profileImageView);
+                        Picasso.get().setLoggingEnabled(true);
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent details = new Intent(HomeActivity.this, ProductDetailsActivity.class);
-                                details.putExtra("pid",model.getPid());
+                                details.putExtra("pid", model.getPid());
                                 details.putExtra("description", model.getDescription());
                                 details.putExtra("pname", model.getPname());
+                                details.putExtra("shipping", model.getShipping());
+                                details.putExtra("address", model.getAddress());
                                 startActivity(details);
+                                finish();
                             }
                         });
                     }
@@ -157,9 +162,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_cart) {
-
+            Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_orders) {
-
+            Intent intent = new Intent(HomeActivity.this, UserNewOrdersActivity.class);
+            startActivity(intent);
         } else if (id == R.id.categories) {
 
         } else if (id == R.id.nav_settings) {

@@ -100,7 +100,6 @@ public class SettingsActivity extends AppCompatActivity {
         userMap.put("address", addressEditText.getText().toString());
         userMap.put("phoneOrder", userPhoneEditText.getText().toString());
         ref.child(Prevalent.currentOnlineUser.getUsername()).updateChildren(userMap);
-
         startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
         Toast.makeText(SettingsActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
         finish();
@@ -128,9 +127,9 @@ public class SettingsActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(fullNameEditText.getText().toString())) {
             Toast.makeText(this, "Name is mandatory.", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(addressEditText.getText().toString())) {
-            Toast.makeText(this, "Name is address.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Address is mandatory.", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(userPhoneEditText.getText().toString())) {
-            Toast.makeText(this, "Name is mandatory.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Phone is mandatory.", Toast.LENGTH_SHORT).show();
         } else if (checker.equals("clicked")) {
             uploadImage();
         }

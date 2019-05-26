@@ -181,4 +181,13 @@
 
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/check_orders"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:background="@color/yellowGreen"
+        android:text="@string/check_orders" />
 </RelativeLayout>

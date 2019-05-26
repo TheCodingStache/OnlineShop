@@ -91,6 +91,7 @@ public class ClientRegisterActivity extends AppCompatActivity {
                                 loadingBar.dismiss();
                                 Intent openLoginActivity = new Intent(ClientRegisterActivity.this, LoginActivity.class);
                                 startActivity(openLoginActivity);
+                                finish();
                             } else {
                                 loadingBar.dismiss();
                                 Toast.makeText(ClientRegisterActivity.this, "Network error, please try again", Toast.LENGTH_LONG).show();
@@ -103,6 +104,7 @@ public class ClientRegisterActivity extends AppCompatActivity {
                     Toast.makeText(ClientRegisterActivity.this, "Please try again using another phone", Toast.LENGTH_LONG).show();
                     Intent openMainActivity = new Intent(ClientRegisterActivity.this, MainActivity.class);
                     startActivity(openMainActivity);
+                    finish();
                 }
             }
 

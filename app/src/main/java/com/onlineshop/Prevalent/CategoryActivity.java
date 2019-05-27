@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.onlineshop.AddProductActivity;
 import com.onlineshop.AdminCheckingOrders.AdminNewOrdersActivity;
-import com.onlineshop.AdminMaintainActivity;
 import com.onlineshop.HomeActivity;
 import com.onlineshop.R;
 

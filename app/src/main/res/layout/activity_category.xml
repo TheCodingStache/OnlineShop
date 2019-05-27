@@ -147,8 +147,7 @@
         android:layout_below="@+id/linear3_category_layout"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="-6dp"
-        android:layout_marginTop="503dp"
+        android:layout_marginTop="480dp"
         android:fontFamily="@font/raleway"
         android:text="Trousers | shorts"
         android:textAlignment="center"
@@ -163,7 +162,7 @@
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="80dp">
+        android:layout_marginTop="50dp">
 
         <ImageView
             android:id="@+id/trousers"
@@ -178,16 +177,21 @@
             android:layout_height="90dp"
             android:src="@drawable/shorts"
             />
-
-
     </LinearLayout>
-
+    <Button
+        android:id="@+id/maintain_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/check_orders"
+        android:layout_margin="5dp"
+        android:background="@color/yellowGreen"
+        android:text="@string/maintain_product" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/check_orders"
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:background="@color/yellowGreen"
         android:text="@string/check_orders" />
 </RelativeLayout>

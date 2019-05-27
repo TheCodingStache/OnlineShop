@@ -31,7 +31,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class AddProductActivity extends AppCompatActivity {
-    private Button checkOrders;
     private String CategoryName, Description, shippingCost, productName, productAddress, saveCurrentDate, saveCurrentTime;
     private ImageView InputProductImage;
     private EditText InputProductName, InputProductDescription, InputProductPrice, InputProductAddress;

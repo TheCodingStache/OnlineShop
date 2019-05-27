@@ -23,7 +23,7 @@ public class AdminUserProductActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference cartListRef;
     private String userID = null;
-
+    private String productID = null;
     @Override
     protected void onStart() {
         super.onStart();
@@ -55,6 +55,7 @@ public class AdminUserProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_user_product);
         userID = getIntent().getStringExtra("uid");
+        productID = getIntent().getStringExtra("pid");
         productList = findViewById(R.id.products_list);
         productList.hasFixedSize();
         layoutManager = new LinearLayoutManager(this);

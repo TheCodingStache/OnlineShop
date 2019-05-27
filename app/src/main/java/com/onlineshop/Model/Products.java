@@ -1,4 +1,7 @@
 package com.onlineshop.Model;
+
+import java.io.Serializable;
+
 public class Products {
     private String pname, description, shipping, image, category, pid, date, time, address;
 

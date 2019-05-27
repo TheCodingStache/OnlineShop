@@ -19,6 +19,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.onlineshop.Model.Orders;
+import com.onlineshop.Model.Products;
 import com.onlineshop.R;
 
 public class AdminNewOrdersActivity extends AppCompatActivity {
@@ -41,7 +42,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
         FirebaseRecyclerOptions<Orders> options = new FirebaseRecyclerOptions.Builder<Orders>()
                 .setQuery(ordersRef, Orders.class)
                 .build();
-        FirebaseRecyclerAdapter<Orders, AdminOrdersViewHolder> adapter = new FirebaseRecyclerAdapter<Orders, AdminOrdersViewHolder>(options) {
+        final FirebaseRecyclerAdapter<Orders, AdminOrdersViewHolder> adapter = new FirebaseRecyclerAdapter<Orders, AdminOrdersViewHolder>(options) {
             @NonNull
             @Override
             public AdminOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
@@ -97,6 +98,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
 
     private void RemoveOrder(String userID) {
         ordersRef.child(userID).removeValue();
+
 
     }
 

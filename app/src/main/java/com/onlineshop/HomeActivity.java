@@ -39,11 +39,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
     private CircleImageView profileImageView;
+    private String productID = null;
+    private String type = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            type = getIntent().getExtras().get("Admin").toString();
+
+        }
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
         ProductsRef.keepSynced(true);
         Paper.init(this);
@@ -69,7 +77,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
-        profileImageView = headerView.findViewById(R.id.user_profile_image);
+        if (!type.equals("Admin")) {
+            profileImageView = headerView.findViewById(R.id.user_profile_image);
+            Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).error(R.drawable.profile).centerCrop().into(profileImageView);
+        }
+
         userNameTextView.setText(Prevalent.currentOnlineUser.getUsername());
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
@@ -90,25 +102,32 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 new FirebaseRecyclerAdapter<Products, ProductViewHolder>(options) {
                     @SuppressLint("SetTextI18n")
                     @Override
-                    protected void onBindViewHolder(@NonNull final ProductViewHolder holder, int position, @NonNull final Products model) {
+                    protected void onBindViewHolder(@NonNull final ProductViewHolder holder, final int position, @NonNull final Products model) {
                         holder.txtProductName.setText(model.getPname());
                         holder.txtProductDescription.setText(model.getDescription());
                         holder.txtProductPrice.setText("Shipping cost " + model.getShipping());
                         holder.txtProductAddress.setText("Address: " + model.getAddress());
                         Picasso.get().load(model.getImage()).into(holder.imageView);
-                        Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).error(R.drawable.profile).centerCrop().into(profileImageView);
-                        Picasso.get().setLoggingEnabled(true);
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent details = new Intent(HomeActivity.this, ProductDetailsActivity.class);
-                                details.putExtra("pid", model.getPid());
-                                details.putExtra("description", model.getDescription());
-                                details.putExtra("pname", model.getPname());
-                                details.putExtra("shipping", model.getShipping());
-                                details.putExtra("address", model.getAddress());
-                                startActivity(details);
-                                finish();
+                                if (type.equals("Admin")) {
+                                    Intent intent = new Intent(HomeActivity.this, AdminMaintainActivity.class);
+                                    intent.putExtra("pid", model.getPid());
+                                    startActivity(intent);
+                                } else {
+                                    String productID = getRef(position).getKey();
+                                    Intent details = new Intent(HomeActivity.this, ProductDetailsActivity.class);
+                                    details.putExtra("uid", productID);
+                                    details.putExtra("pid", model.getPid());
+                                    details.putExtra("description", model.getDescription());
+                                    details.putExtra("pname", model.getPname());
+                                    details.putExtra("shipping", model.getShipping());
+                                    details.putExtra("address", model.getAddress());
+                                    startActivity(details);
+                                    finish();
+                                }
+
                             }
                         });
                     }

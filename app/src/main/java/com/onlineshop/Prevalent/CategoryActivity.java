@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.onlineshop.AddProductActivity;
 import com.onlineshop.AdminCheckingOrders.AdminNewOrdersActivity;
+import com.onlineshop.AdminMaintainActivity;
+import com.onlineshop.HomeActivity;
 import com.onlineshop.R;
 
 import io.paperdb.Paper;
@@ -19,6 +21,7 @@ import io.paperdb.Paper;
 @SuppressLint("Registered")
 public class CategoryActivity extends AppCompatActivity {
     private boolean doubleBackToExitPressedOnce = false;
+    private Button maintain;
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -44,6 +47,7 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         Button checkOrders = findViewById(R.id.check_orders);
+        maintain = findViewById(R.id.maintain_product);
         ImageView tShirts = findViewById(R.id.t_shirts);
         ImageView sportsTShirts = findViewById(R.id.sports_t_shirts);
         ImageView femaleDresses = findViewById(R.id.female_dresses);
@@ -161,7 +165,14 @@ public class CategoryActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        maintain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CategoryActivity.this, HomeActivity.class);
+                intent.putExtra("Admin", "Admin");
+                startActivity(intent);
+            }
+        });
         checkOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

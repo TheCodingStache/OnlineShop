@@ -76,6 +76,15 @@
             android:background="@color/yellowGreen"
             android:text="@string/apply_changes"
             android:textColor="@android:color/white" />
+        <Button
+            android:id="@+id/delete_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/apply_changes_maintain"
+            android:background="@color/yellowGreen"
+            android:text="@string/delete_product"
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/white" />
 
     </RelativeLayout>
 

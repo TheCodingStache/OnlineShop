@@ -64,6 +64,7 @@ public class UserNewOrdersActivity extends AppCompatActivity {
                         Intent intent = new Intent(UserNewOrdersActivity.this, AdminUserProductActivity.class);
                         intent.putExtra("uid", userID);
                         startActivity(intent);
+                        finishAndRemoveTask();
                     }
                 });
                 holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -20,7 +20,7 @@ import io.paperdb.Paper;
 @SuppressLint("Registered")
 public class CategoryActivity extends AppCompatActivity {
     private boolean doubleBackToExitPressedOnce = false;
-    private Button maintain;
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -46,7 +46,7 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         Button checkOrders = findViewById(R.id.check_orders);
-        maintain = findViewById(R.id.maintain_product);
+        Button maintain = findViewById(R.id.maintain_product);
         ImageView tShirts = findViewById(R.id.t_shirts);
         ImageView sportsTShirts = findViewById(R.id.sports_t_shirts);
         ImageView femaleDresses = findViewById(R.id.female_dresses);
@@ -170,6 +170,7 @@ public class CategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(CategoryActivity.this, HomeActivity.class);
                 intent.putExtra("Admin", "Admin");
                 startActivity(intent);
+                finish();
             }
         });
         checkOrders.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +179,8 @@ public class CategoryActivity extends AppCompatActivity {
                 Intent intent = new Intent(CategoryActivity.this, AdminNewOrdersActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                finish();
+                finishAndRemoveTask();
+
             }
         });
     }

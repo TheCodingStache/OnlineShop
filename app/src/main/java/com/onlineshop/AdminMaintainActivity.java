@@ -25,11 +25,18 @@ import java.util.HashMap;
 
 public class AdminMaintainActivity extends AppCompatActivity {
     private EditText Name, ShippingCost, Description, Address;
-    Button applyChangesButton;
+    Button applyChangesButton, deleteProduct;
     private ImageView imageView;
     private String productID = "";
     private DatabaseReference productRef;
     String productName, pDescription, pShipping, pAddress;
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AdminMaintainActivity.this, HomeActivity.class);
+        startActivity(intent);
+        finishAndRemoveTask();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,7 @@ public class AdminMaintainActivity extends AppCompatActivity {
         productRef = FirebaseDatabase.getInstance().getReference().child("Products").child(productID);
         imageView = findViewById(R.id.product_image);
         applyChangesButton = findViewById(R.id.apply_changes_maintain);
+        deleteProduct = findViewById(R.id.delete_product);
         Name = findViewById(R.id.product_name);
         ShippingCost = findViewById(R.id.product_price);
         Address = findViewById(R.id.product_address);
@@ -48,6 +56,25 @@ public class AdminMaintainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 applyChanges();
+                finish();
+            }
+        });
+        deleteProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteThisProduct();
+            }
+        });
+    }
+
+    private void deleteThisProduct() {
+        productRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(AdminMaintainActivity.this, "Product deleted successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdminMaintainActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finishAndRemoveTask();
             }
         });
     }

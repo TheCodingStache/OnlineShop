@@ -20,11 +20,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.onlineshop.Model.Orders;
 import com.onlineshop.Model.Products;
+import com.onlineshop.Prevalent.CategoryActivity;
 import com.onlineshop.R;
 
 public class AdminNewOrdersActivity extends AppCompatActivity {
     private RecyclerView orderList;
     private DatabaseReference ordersRef;
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AdminNewOrdersActivity.this, CategoryActivity.class);
+        startActivity(intent);
+        finishAndRemoveTask();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

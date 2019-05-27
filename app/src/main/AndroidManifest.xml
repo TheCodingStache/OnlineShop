@@ -4,6 +4,8 @@
     package="com.onlineshop">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,8 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AdminMaintainActivity"></activity>
-        <activity android:name=".AdminCheckingOrders.AdminUserProductActivity" />
+        <activity
+            android:name=".AdminMaintainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdminCheckingOrders.AdminUserProductActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AdminCheckingOrders.AdminNewOrdersActivity"
             android:screenOrientation="portrait" />

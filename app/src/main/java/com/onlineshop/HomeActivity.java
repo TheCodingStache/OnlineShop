@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.onlineshop.AdminCheckingOrders.AdminNewOrdersActivity;
 import com.onlineshop.Model.Products;
+import com.onlineshop.Prevalent.CategoryActivity;
 import com.onlineshop.Prevalent.Prevalent;
 import com.onlineshop.UserCheckingOrders.UserNewOrdersActivity;
 import com.onlineshop.ViewHolder.ProductViewHolder;
@@ -38,7 +39,6 @@ import io.paperdb.Paper;
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
-    private CircleImageView profileImageView;
     private String productID = null;
     private String type = "";
 
@@ -58,13 +58,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Welcome to Online Shop");
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.final_cart);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton cartButton = findViewById(R.id.final_cart);
+        cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-                startActivity(intent);
-                finish();
+                if (!type.equals("Admin")) {
+                    Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -78,7 +79,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
         if (!type.equals("Admin")) {
-            profileImageView = headerView.findViewById(R.id.user_profile_image);
+            CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
             Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).error(R.drawable.profile).centerCrop().into(profileImageView);
         }
 
@@ -115,6 +116,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                     Intent intent = new Intent(HomeActivity.this, AdminMaintainActivity.class);
                                     intent.putExtra("pid", model.getPid());
                                     startActivity(intent);
+                                    finish();
                                 } else {
                                     String productID = getRef(position).getKey();
                                     Intent details = new Intent(HomeActivity.this, ProductDetailsActivity.class);
@@ -148,9 +150,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        } 
     }
 
 
@@ -173,31 +173,35 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_cart) {
-            Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-            startActivity(intent);
-            finish();
+            if (!type.equals("Admin")) {
+                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+
         } else if (id == R.id.nav_orders) {
-            Intent intent = new Intent(HomeActivity.this, UserNewOrdersActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.categories) {
+            if (!type.equals("Admin")) {
+                Intent intent = new Intent(HomeActivity.this, UserNewOrdersActivity.class);
+                startActivity(intent);
+            }
 
         } else if (id == R.id.nav_settings) {
-            Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
-            startActivity(intent);
+            if (!type.equals("Admin")) {
+                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+
         } else if (id == R.id.nav_logout) {
-            Paper.book().destroy();
-            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+                Paper.book().destroy();
+                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

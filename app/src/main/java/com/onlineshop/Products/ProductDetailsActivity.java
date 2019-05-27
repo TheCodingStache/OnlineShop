@@ -1,4 +1,4 @@
-package com.onlineshop;
+package com.onlineshop.Products;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -18,8 +18,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.onlineshop.HomeActivity;
 import com.onlineshop.Model.Products;
-import com.onlineshop.Prevalent.Prevalent;
+import com.onlineshop.Prevalent.CurrentUser;
+import com.onlineshop.R;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -124,14 +126,14 @@ public class ProductDetailsActivity extends AppCompatActivity {
         cartMap.put("date", saveCurrentDate);
         cartMap.put("time", saveCurrentTime);
         cartMap.put("address", productAddress.getText().toString());
-        cartListRef.child("User View").child(Prevalent.currentOnlineUser.getUsername())
+        cartListRef.child("User View").child(CurrentUser.currentOnlineUser.getUsername())
                 .child("Products").child(productID)
                 .updateChildren(cartMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            cartListRef.child("Admin View").child(Prevalent.currentOnlineUser.getUsername())
+                            cartListRef.child("Admin View").child(CurrentUser.currentOnlineUser.getUsername())
                                     .child("Products").child(productID)
                                     .updateChildren(cartMap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -154,7 +156,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private void CheckOrderState() {
         DatabaseReference ordersRef;
         ordersRef = FirebaseDatabase.getInstance().getReference()
-                .child("Orders").child(Prevalent.currentOnlineUser.getUsername());
+                .child("Orders").child(CurrentUser.currentOnlineUser.getUsername());
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -18,12 +18,28 @@ import com.onlineshop.Model.Products;
 import com.onlineshop.R;
 import com.onlineshop.ViewHolder.CartViewHolder;
 
-public class AdminUserProductActivity extends AppCompatActivity {
+public class AdminCheckUsersCartActivity extends AppCompatActivity {
     private RecyclerView productList;
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference cartListRef;
     private String userID = null;
     private String productID = null;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_admin_user_product);
+        userID = getIntent().getStringExtra("uid");
+        productID = getIntent().getStringExtra("pid");
+        productList = findViewById(R.id.products_list);
+        productList.hasFixedSize();
+        layoutManager = new LinearLayoutManager(this);
+        productList.setLayoutManager(layoutManager);
+        cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List")
+                .child("Admin View").child(userID).child("Products");
+
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -50,18 +66,4 @@ public class AdminUserProductActivity extends AppCompatActivity {
         adapter.startListening();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_user_product);
-        userID = getIntent().getStringExtra("uid");
-        productID = getIntent().getStringExtra("pid");
-        productList = findViewById(R.id.products_list);
-        productList.hasFixedSize();
-        layoutManager = new LinearLayoutManager(this);
-        productList.setLayoutManager(layoutManager);
-        cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List")
-                .child("Admin View").child(userID).child("Products");
-
-    }
 }

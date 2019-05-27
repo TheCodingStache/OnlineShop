@@ -1,4 +1,4 @@
-package com.onlineshop;
+package com.onlineshop.Register;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -7,8 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.onlineshop.Client.ClientRegisterActivity;
-import com.onlineshop.Seller.SellerRegisterActivity;
+import com.onlineshop.R;
 
 @SuppressLint("Registered")
 public class SelectUserOptionActivity extends AppCompatActivity {
@@ -25,7 +24,7 @@ public class SelectUserOptionActivity extends AppCompatActivity {
         seller.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openSellerRegistration = new Intent(SelectUserOptionActivity.this, SellerRegisterActivity.class);
+                Intent openSellerRegistration = new Intent(SelectUserOptionActivity.this, GiveawayRegisterActivity.class);
                 startActivity(openSellerRegistration);
                 finishAndRemoveTask();
             }

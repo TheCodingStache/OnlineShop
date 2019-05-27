@@ -1,4 +1,4 @@
-package com.onlineshop;
+package com.onlineshop.Cart;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -14,7 +14,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.onlineshop.Prevalent.Prevalent;
+import com.onlineshop.HomeActivity;
+import com.onlineshop.Prevalent.CurrentUser;
+import com.onlineshop.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -64,7 +66,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         saveCurrentTime = currentTime.format(calendar.getTime());
         final DatabaseReference ordersRef = FirebaseDatabase.getInstance().getReference()
                 .child("Orders")
-                .child(Prevalent.currentOnlineUser.getUsername());
+                .child(CurrentUser.currentOnlineUser.getUsername());
         HashMap<String, Object> orders = new HashMap<>();
         orders.put("name", nameEditText.getText().toString());
         orders.put("phone", phoneEditText.getText().toString());
@@ -79,7 +81,7 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     FirebaseDatabase.getInstance().getReference().child("Cart List")
                             .child("User View")
-                            .child(Prevalent.currentOnlineUser.getUsername())
+                            .child(CurrentUser.currentOnlineUser.getUsername())
                             .removeValue()
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

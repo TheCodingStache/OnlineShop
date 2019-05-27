@@ -18,7 +18,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.onlineshop.AdminCheckingOrders.AdminUserProductActivity;
+import com.onlineshop.AdminCheckingOrders.AdminCheckUsersCartActivity;
 import com.onlineshop.Model.Orders;
 import com.onlineshop.R;
 
@@ -61,7 +61,7 @@ public class UserNewOrdersActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         String userID = getRef(position).getKey();
-                        Intent intent = new Intent(UserNewOrdersActivity.this, AdminUserProductActivity.class);
+                        Intent intent = new Intent(UserNewOrdersActivity.this, AdminCheckUsersCartActivity.class);
                         intent.putExtra("uid", userID);
                         startActivity(intent);
                         finishAndRemoveTask();
@@ -103,10 +103,10 @@ public class UserNewOrdersActivity extends AppCompatActivity {
     }
 
     public static class UserOrdersViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, phone, dateTime, city, address;
+        TextView name, phone, dateTime, city, address;
         private Button showOrders;
 
-        public UserOrdersViewHolder(@NonNull View itemView) {
+        UserOrdersViewHolder(@NonNull View itemView) {
             super(itemView);
             showOrders = itemView.findViewById(R.id.order_products);
             name = itemView.findViewById(R.id.your_name);

@@ -1,4 +1,4 @@
-package com.onlineshop;
+package com.onlineshop.Cart;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,9 +24,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.onlineshop.HomeActivity;
 import com.onlineshop.Model.Cart;
-import com.onlineshop.Model.Products;
-import com.onlineshop.Prevalent.Prevalent;
+import com.onlineshop.Prevalent.CurrentUser;
+import com.onlineshop.R;
 import com.onlineshop.ViewHolder.CartViewHolder;
 
 public class CartActivity extends AppCompatActivity {
@@ -72,7 +73,7 @@ public class CartActivity extends AppCompatActivity {
         final DatabaseReference cartListRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
         FirebaseRecyclerOptions<Cart> options = new FirebaseRecyclerOptions.Builder<Cart>()
                 .setQuery(cartListRef
-                        .child("User View").child(Prevalent.currentOnlineUser.getUsername()).child("Products"), Cart.class)
+                        .child("User View").child(CurrentUser.currentOnlineUser.getUsername()).child("Products"), Cart.class)
                 .build();
         FirebaseRecyclerAdapter<Cart, CartViewHolder> adapter = new FirebaseRecyclerAdapter<Cart, CartViewHolder>(options) {
             @Override
@@ -83,7 +84,7 @@ public class CartActivity extends AppCompatActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        CharSequence options[] = new CharSequence[]{
+                        CharSequence[] options = new CharSequence[]{
                                 "Remove"
                         };
                         AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
@@ -93,7 +94,7 @@ public class CartActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 if (i == 0) {
                                     cartListRef.child("User View")
-                                            .child(Prevalent.currentOnlineUser.getUsername())
+                                            .child(CurrentUser.currentOnlineUser.getUsername())
                                             .child("Products")
                                             .child(model.getPid())
                                             .removeValue()
@@ -129,7 +130,7 @@ public class CartActivity extends AppCompatActivity {
 
     private void CheckOrderState() {
         DatabaseReference ordersRef;
-        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(Prevalent.currentOnlineUser.getUsername());
+        ordersRef = FirebaseDatabase.getInstance().getReference().child("Orders").child(CurrentUser.currentOnlineUser.getUsername());
         ordersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

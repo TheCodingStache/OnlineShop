@@ -16,8 +16,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.onlineshop.Login.LoginActivity;
 import com.onlineshop.Model.Users;
-import com.onlineshop.Prevalent.Prevalent;
+import com.onlineshop.Prevalent.CurrentUser;
+import com.onlineshop.Register.SelectUserOptionActivity;
+
 import io.paperdb.Paper;
 public class MainActivity extends AppCompatActivity {
     private ProgressDialog loadingBar;
@@ -50,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        String Username = Paper.book().read(Prevalent.Username);
-        String UserPasswordKey = Paper.book().read(Prevalent.UserPasswordKey);
+        String Username = Paper.book().read(CurrentUser.Username);
+        String UserPasswordKey = Paper.book().read(CurrentUser.UserPasswordKey);
         if (Username != null && UserPasswordKey != null) {
             if (!TextUtils.isEmpty(Username) && !TextUtils.isEmpty(UserPasswordKey)) {
                 AllowClientAccess(Username, UserPasswordKey);
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Please wait, you are already logged in...", Toast.LENGTH_SHORT).show();
                             loadingBar.dismiss();
                             Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                            Prevalent.currentOnlineUser = usersData;
+                            CurrentUser.currentOnlineUser = usersData;
                             startActivity(intent);
                         } else {
                             loadingBar.dismiss();

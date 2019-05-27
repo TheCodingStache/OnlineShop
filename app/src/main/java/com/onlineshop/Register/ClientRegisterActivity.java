@@ -1,4 +1,4 @@
-package com.onlineshop.Client;
+package com.onlineshop.Register;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.onlineshop.LoginActivity;
+import com.onlineshop.Login.LoginActivity;
 import com.onlineshop.MainActivity;
 import com.onlineshop.R;
 

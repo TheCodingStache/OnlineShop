@@ -1,4 +1,4 @@
-package com.onlineshop;
+package com.onlineshop.Login;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -19,10 +19,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.onlineshop.Model.Orders;
+import com.onlineshop.Products.CategoryActivity;
+import com.onlineshop.HomeActivity;
 import com.onlineshop.Model.Users;
-import com.onlineshop.Prevalent.CategoryActivity;
-import com.onlineshop.Prevalent.Prevalent;
+import com.onlineshop.Prevalent.CurrentUser;
+import com.onlineshop.R;
 
 import io.paperdb.Paper;
 
@@ -95,8 +96,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void allowAccessToAccount(final String username, final String password) {
         if (checkBox.isChecked()) {
-            Paper.book().write(Prevalent.Username, username);
-            Paper.book().write(Prevalent.UserPasswordKey, password);
+            Paper.book().write(CurrentUser.Username, username);
+            Paper.book().write(CurrentUser.UserPasswordKey, password);
         }
         final DatabaseReference RootRef;
         RootRef = FirebaseDatabase.getInstance().getReference();
@@ -111,13 +112,13 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Welcome Giveawayer! you logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, CategoryActivity.class);
-                                Prevalent.currentOnlineUser = usersData;
+                                CurrentUser.currentOnlineUser = usersData;
                                 startActivity(intent);
                             } else if (parentDatabaseName.equals("Clients")) {
                                 Toast.makeText(LoginActivity.this, "Welcome Client, you logged in Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                Prevalent.currentOnlineUser = usersData;
+                                CurrentUser.currentOnlineUser = usersData;
                                 startActivity(intent);
                             }
                         } else {

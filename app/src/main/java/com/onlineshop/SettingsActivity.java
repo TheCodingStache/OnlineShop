@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
-import com.onlineshop.Prevalent.Prevalent;
+import com.onlineshop.Prevalent.CurrentUser;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 
@@ -99,7 +99,7 @@ public class SettingsActivity extends AppCompatActivity {
         userMap.put("name", fullNameEditText.getText().toString());
         userMap.put("address", addressEditText.getText().toString());
         userMap.put("phoneOrder", userPhoneEditText.getText().toString());
-        ref.child(Prevalent.currentOnlineUser.getUsername()).updateChildren(userMap);
+        ref.child(CurrentUser.currentOnlineUser.getUsername()).updateChildren(userMap);
         startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
         Toast.makeText(SettingsActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
         finish();
@@ -145,7 +145,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         if (imageUri != null) {
             final StorageReference fileRef = storageProfilePictureRef
-                    .child(Prevalent.currentOnlineUser.getUsername() + ".jpg");
+                    .child(CurrentUser.currentOnlineUser.getUsername() + ".jpg");
 
             StorageTask uploadTask = fileRef.putFile(imageUri);
 
@@ -171,7 +171,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 userMap.put("address", addressEditText.getText().toString());
                                 userMap.put("phoneOrder", userPhoneEditText.getText().toString());
                                 userMap.put("image", myUrl);
-                                ref.child(Prevalent.currentOnlineUser.getUsername()).updateChildren(userMap);
+                                ref.child(CurrentUser.currentOnlineUser.getUsername()).updateChildren(userMap);
                                 progressDialog.dismiss();
                                 startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
                                 Toast.makeText(SettingsActivity.this, "Profile Info update successfully.", Toast.LENGTH_SHORT).show();
@@ -189,7 +189,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     private void userInfoDisplay(final CircleImageView profileImageView, final EditText fullNameEditText, final EditText userPhoneEditText, final EditText addressEditText) {
-        DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Profile").child(Prevalent.currentOnlineUser.getUsername());
+        DatabaseReference UsersRef = FirebaseDatabase.getInstance().getReference().child("Profile").child(CurrentUser.currentOnlineUser.getUsername());
 
         UsersRef.addValueEventListener(new ValueEventListener() {
             @Override

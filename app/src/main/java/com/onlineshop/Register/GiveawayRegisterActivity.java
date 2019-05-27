@@ -1,4 +1,4 @@
-package com.onlineshop.Seller;
+package com.onlineshop.Register;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -19,14 +19,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.onlineshop.LoginActivity;
+import com.onlineshop.Login.LoginActivity;
 import com.onlineshop.MainActivity;
 import com.onlineshop.R;
 
 import java.util.HashMap;
 
 @SuppressLint("Registered")
-public class SellerRegisterActivity extends AppCompatActivity {
+public class GiveawayRegisterActivity extends AppCompatActivity {
     private EditText username;
     private EditText phone;
     private EditText password;
@@ -87,22 +87,22 @@ public class SellerRegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(SellerRegisterActivity.this, "Congratulations, your account has been created", Toast.LENGTH_LONG).show();
+                                Toast.makeText(GiveawayRegisterActivity.this, "Congratulations, your account has been created", Toast.LENGTH_LONG).show();
                                 loadingBar.dismiss();
-                                Intent openLoginActivity = new Intent(SellerRegisterActivity.this, LoginActivity.class);
+                                Intent openLoginActivity = new Intent(GiveawayRegisterActivity.this, LoginActivity.class);
                                 startActivity(openLoginActivity);
                                 finishAndRemoveTask();
                             } else {
                                 loadingBar.dismiss();
-                                Toast.makeText(SellerRegisterActivity.this, "Network error, please try again", Toast.LENGTH_LONG).show();
+                                Toast.makeText(GiveawayRegisterActivity.this, "Network error, please try again", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
                 } else {
-                    Toast.makeText(SellerRegisterActivity.this, "This " + username + " already exists", Toast.LENGTH_LONG).show();
+                    Toast.makeText(GiveawayRegisterActivity.this, "This " + username + " already exists", Toast.LENGTH_LONG).show();
                     loadingBar.dismiss();
-                    Toast.makeText(SellerRegisterActivity.this, "Please try again using another phone", Toast.LENGTH_LONG).show();
-                    Intent openMainActivity = new Intent(SellerRegisterActivity.this, MainActivity.class);
+                    Toast.makeText(GiveawayRegisterActivity.this, "Please try again using another phone", Toast.LENGTH_LONG).show();
+                    Intent openMainActivity = new Intent(GiveawayRegisterActivity.this, MainActivity.class);
                     startActivity(openMainActivity);
                     finish();
                 }

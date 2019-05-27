@@ -1,4 +1,4 @@
-package com.onlineshop;
+package com.onlineshop.Products;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.onlineshop.Prevalent.CategoryActivity;
+import com.onlineshop.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

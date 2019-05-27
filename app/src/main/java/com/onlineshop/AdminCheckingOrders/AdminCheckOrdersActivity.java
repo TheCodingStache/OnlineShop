@@ -19,17 +19,16 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.onlineshop.Model.Orders;
-import com.onlineshop.Model.Products;
-import com.onlineshop.Prevalent.CategoryActivity;
+import com.onlineshop.Products.CategoryActivity;
 import com.onlineshop.R;
 
-public class AdminNewOrdersActivity extends AppCompatActivity {
+public class AdminCheckOrdersActivity extends AppCompatActivity {
     private RecyclerView orderList;
     private DatabaseReference ordersRef;
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(AdminNewOrdersActivity.this, CategoryActivity.class);
+        Intent intent = new Intent(AdminCheckOrdersActivity.this, CategoryActivity.class);
         startActivity(intent);
         finishAndRemoveTask();
     }
@@ -69,7 +68,7 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         String userID = getRef(position).getKey();
-                        Intent intent = new Intent(AdminNewOrdersActivity.this, AdminUserProductActivity.class);
+                        Intent intent = new Intent(AdminCheckOrdersActivity.this, AdminCheckUsersCartActivity.class);
                         intent.putExtra("uid", userID);
                         startActivity(intent);
                     }
@@ -77,13 +76,13 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        CharSequence options[] = new CharSequence[]{
+                        CharSequence[] options = new CharSequence[]{
                                 "Yes",
                                 "No"
 
                         };
-                        AlertDialog.Builder builder = new AlertDialog.Builder(AdminNewOrdersActivity.this);
-                        builder.setTitle("Have your shipped this order");
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AdminCheckOrdersActivity.this);
+                        builder.setTitle("Do you want to dispatch this order?");
                         builder.setItems(options, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -111,10 +110,10 @@ public class AdminNewOrdersActivity extends AppCompatActivity {
     }
 
     public static class AdminOrdersViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, phone, dateTime, city, address;
+        TextView name, phone, dateTime, city, address;
         private Button showOrders;
 
-        public AdminOrdersViewHolder(@NonNull View itemView) {
+        AdminOrdersViewHolder(@NonNull View itemView) {
             super(itemView);
             showOrders = itemView.findViewById(R.id.order_products);
             name = itemView.findViewById(R.id.your_name);

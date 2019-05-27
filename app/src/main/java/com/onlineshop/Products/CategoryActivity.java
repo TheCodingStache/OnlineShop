@@ -1,4 +1,4 @@
-package com.onlineshop.Prevalent;
+package com.onlineshop.Products;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,8 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.onlineshop.AddProductActivity;
-import com.onlineshop.AdminCheckingOrders.AdminNewOrdersActivity;
+import com.onlineshop.AdminCheckingOrders.AdminCheckOrdersActivity;
 import com.onlineshop.HomeActivity;
 import com.onlineshop.R;
 
@@ -176,8 +175,8 @@ public class CategoryActivity extends AppCompatActivity {
         checkOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CategoryActivity.this, AdminNewOrdersActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent intent = new Intent(CategoryActivity.this, AdminCheckOrdersActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finishAndRemoveTask();
 

@@ -1,4 +1,4 @@
-package com.onlineshop;
+package com.onlineshop.AdminCheckingOrders;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -18,7 +18,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.onlineshop.Prevalent.CategoryActivity;
+import com.onlineshop.Products.CategoryActivity;
+import com.onlineshop.HomeActivity;
+import com.onlineshop.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -63,6 +65,7 @@ public class AdminMaintainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 deleteThisProduct();
+                finish();
             }
         });
     }
@@ -72,7 +75,7 @@ public class AdminMaintainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(AdminMaintainActivity.this, "Product deleted successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(AdminMaintainActivity.this, HomeActivity.class);
+                Intent intent = new Intent(AdminMaintainActivity.this, CategoryActivity.class);
                 startActivity(intent);
                 finishAndRemoveTask();
             }

@@ -1,6 +1,7 @@
 package com.onlineshop;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,16 +20,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideContext;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.onlineshop.AdminCheckingOrders.AdminNewOrdersActivity;
+import com.onlineshop.AdminCheckingOrders.AdminMaintainActivity;
+import com.onlineshop.Cart.CartActivity;
 import com.onlineshop.Model.Products;
-import com.onlineshop.Prevalent.CategoryActivity;
-import com.onlineshop.Prevalent.Prevalent;
+import com.onlineshop.Prevalent.CurrentUser;
+import com.onlineshop.Products.CategoryActivity;
+import com.onlineshop.Products.ProductDetailsActivity;
 import com.onlineshop.UserCheckingOrders.UserNewOrdersActivity;
 import com.onlineshop.ViewHolder.ProductViewHolder;
 import com.squareup.picasso.Picasso;
@@ -39,8 +48,24 @@ import io.paperdb.Paper;
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DatabaseReference ProductsRef;
     private RecyclerView recyclerView;
+    private RequestOptions requestOptions;
+    private Context mContext;
     private String productID = null;
     private String type = "";
+
+    public HomeActivity(Context mContext) {
+        this.mContext = mContext;
+        requestOptions = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.common_google_signin_btn_text_light)
+                .error(R.drawable.add)
+                .priority(Priority.HIGH);
+    }
+
+    public HomeActivity() {
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +81,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         ProductsRef.keepSynced(true);
         Paper.init(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Welcome to Online Shop");
+        toolbar.setTitle("Welcome to Giveaway Shop");
         setSupportActionBar(toolbar);
         FloatingActionButton cartButton = findViewById(R.id.final_cart);
         cartButton.setOnClickListener(new View.OnClickListener() {
@@ -78,12 +103,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         View headerView = navigationView.getHeaderView(0);
         TextView userNameTextView = headerView.findViewById(R.id.user_profile_name);
+        CircleImageView imageView = headerView.findViewById(R.id.user_profile_image);
         if (!type.equals("Admin")) {
-            CircleImageView profileImageView = headerView.findViewById(R.id.user_profile_image);
-            Picasso.get().load(Prevalent.currentOnlineUser.getImage()).placeholder(R.drawable.profile).error(R.drawable.profile).centerCrop().into(profileImageView);
+            if (mContext != null) {
+                Glide.with(mContext)
+                        .load(mContext)
+                        .apply(requestOptions)
+                        .into(imageView);
+            }
         }
 
-        userNameTextView.setText(Prevalent.currentOnlineUser.getUsername());
+        userNameTextView.setText(CurrentUser.currentOnlineUser.getUsername());
         recyclerView = findViewById(R.id.recycler_menu);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -150,7 +180,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } 
+        } else if (!type.equals("Admin")) {
+            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+            startActivity(intent);
+            finishAndRemoveTask();
+        } else {
+            Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
+            startActivity(intent);
+            finishAndRemoveTask();
+        }
     }
 
 
@@ -174,7 +212,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -197,11 +235,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
 
         } else if (id == R.id.nav_logout) {
-                Paper.book().destroy();
-                Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
+            Paper.book().destroy();
+            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
